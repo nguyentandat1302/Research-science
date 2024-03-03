@@ -1,0 +1,131 @@
+﻿<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/Site.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+@Styles.Render("~/Content/css")
+
+<div>
+    <div class="row" style="padding-top:50px">
+        <div class="col-6">
+            <a href="~/HomePage/Index" class="text-decoration-none">
+                <h3 style="color: azure; font-weight: 700;">TD-Freelancer and Develoyment</h3>
+            </a>
+        </div>
+        <div>
+            @*//  @if (Session["EMAIL"] != null)
+                {
+                   // var customer = (Final_Report.Models.CUSTOMER)Session["customer"];
+                    <div style="float: right">
+                       @if (customer != null && customer.PICTURES != null)
+                        {
+                            <img src="@customer.PICTURES" style=" width: 40px;height: 40px;border-radius: 50%;object-fit: cover;" />
+                        }
+                        else
+                        {
+                            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" style=" width: 40px;height: 40px;border-radius: 50%;object-fit: cover;" />
+                        }
+                        <a class="dropdown-toggle btn" data-bs-toggle="dropdown" aria-expanded="false"
+                           style="background-color: azure; color: darkblue; font-weight: 500">@customer.USERNAME</a>*@
+            @*<ul class="dropdown-menu text-light">
+                        <li><a class="dropdown-item" href="@Url.Action("Profile","User")">Profile</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("BookingHistory","User")">Booking history</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("Logout","User")">Log out</a></li>
+                    </ul>
+                </div>*@
+            @*}
+                else
+                {*@
+            <div style="float:right">
+                <a class="btn" style="background-color:azure;color:darkred ;font-weight:500" href=@Url.Action("SignUp", "User")>
+                    Sign up Employers
+                </a>
+                <a class="btn" style="background-color:azure;color:darkred ;font-weight:500" href=@Url.Action("Register", "User")>Register as a job seeker</a>
+                <a class="btn" style="background-color:azure;color:darkred ;font-weight:500" href=@Url.Action("Login", "User")>Sign in</a>
+            </div>
+            @*}*@
+        </div>
+    </div>
+    <div class="row">
+        <ul class="nav nav-pills">
+            <li class="nav-item dropdown" style="padding-right: 20px">
+                <a class="btn dropdown-toggle" href="#" id="staysDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: 300; border-radius: 20px; color: azure; background-color: darkred">
+                    <i class="material-symbols-outlined" style="vertical-align:middle;font-size:30px">bed</i> Stays
+                </a>
+                <div class="dropdown-menu" aria-labelledby="staysDropdown">
+                    <a class="dropdown-item" href="@Url.Action("Stays", "HomePage")">Stay Option 1</a>
+                    <a class="dropdown-item" href="#">Stay Option 2</a>
+                    <a class="dropdown-item" href="#">Stay Option 3</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown" style="padding-right: 20px">
+                <a class="btn dropdown-toggle" href="#" id="flightsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: 300; border-radius: 20px; color: azure; background-color: darkred">
+                    <i class="material-symbols-outlined" style="vertical-align:middle;font-size:30px">flight</i>   Flights
+                </a>
+                <div class="dropdown-menu" aria-labelledby="flightsDropdown">
+                    <a class="dropdown-item" href="@Url.Action("Flights", "HomePage")">Flight Option 1</a>
+                    <a class="dropdown-item" href="#">Flight Option 2</a>
+                    <a class="dropdown-item" href="#">Flight Option 3</a>
+                    <!-- Add more options as needed -->
+                </div>
+            </li>
+            <li class="nav-item dropdown" style="padding-right: 20px">
+                <a class="btn dropdown-toggle" href="#" id="flightsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: 300; border-radius: 20px; color: azure; background-color: darkred">
+                    <i class="material-symbols-outlined" style="vertical-align:middle;font-size:30px">flight</i>   Flights
+                </a>
+                <div class="dropdown-menu" aria-labelledby="flightsDropdown">
+                    <a class="dropdown-item" href="@Url.Action("Flights", "HomePage")">Flight Option 1</a>
+                    <a class="dropdown-item" href="#">Flight Option 2</a>
+                    <a class="dropdown-item" href="#">Flight Option 3</a>
+                    <!-- Add more options as needed -->
+                </div>
+            </li>
+
+            <li class="nav-item dropdown" style="padding-right: 20px">
+                <a class="btn dropdown-toggle" href="#" id="flightsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: 300; border-radius: 20px; color: azure; background-color: darkred">
+                    <i class="material-symbols-outlined" style="vertical-align:middle;font-size:30px">flight</i>   Flights
+                </a>
+                <div class="dropdown-menu" aria-labelledby="flightsDropdown">
+                    <a class="dropdown-item" href="@Url.Action("Flights", "HomePage")">Flight Option 1</a>
+                    <a class="dropdown-item" href="#">Flight Option 2</a>
+                    <a class="dropdown-item" href="#">Flight Option 3</a>
+                    <!-- Add more options as needed -->
+                </div>
+            </li>
+            <li class="nav-item dropdown" style="padding-right: 20px">
+                <a class="btn dropdown-toggle" href="#" id="flightsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: 300; border-radius: 20px; color: azure; background-color: darkred">
+                    <i class="material-symbols-outlined" style="vertical-align:middle;font-size:30px">flight</i>   Flights
+                </a>
+                <div class="dropdown-menu" aria-labelledby="flightsDropdown">
+                    <a class="dropdown-item" href="@Url.Action("Flights", "HomePage")">Flight Option 1</a>
+                    <a class="dropdown-item" href="#">Flight Option 2</a>
+                    <a class="dropdown-item" href="#">Flight Option 3</a>
+                    <!-- Add more options as needed -->
+                </div>
+            </li>
+            <li class="nav-item dropdown" style="padding-right: 20px">
+                <a class="btn dropdown-toggle" href="#" id="flightsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: 300; border-radius: 20px; color: azure; background-color: darkred">
+                    <i class="material-symbols-outlined" style="vertical-align:middle;font-size:30px">flight</i>   Flights
+                </a>
+                <div class="dropdown-menu" aria-labelledby="flightsDropdown">
+                    <a class="dropdown-item" href="@Url.Action("Flights", "HomePage")">Flight Option 1</a>
+                    <a class="dropdown-item" href="#">Flight Option 2</a>
+                    <a class="dropdown-item" href="#">Flight Option 3</a>
+                    <!-- Add more options as needed -->
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="row" style="padding-top:150px">
+        <p style="font-size:45px;color:azure;font-weight:700">
+            Find your job
+
+        </p>
+        <p style="font-size:20px;color:azure;font-weight:300">
+            Find more jobs, design, programming, drawing and more...
+        </p>
+    </div>
+</div>
