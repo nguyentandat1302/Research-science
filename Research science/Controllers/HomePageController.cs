@@ -57,6 +57,10 @@ namespace Research_science.Controllers
         {
             return PartialView();
         }
+        public ActionResult Contract()
+        {
+            return PartialView();
+        }
 
     }
 }
