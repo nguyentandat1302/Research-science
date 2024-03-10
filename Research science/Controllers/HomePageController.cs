@@ -1,5 +1,9 @@
-﻿using System;
+﻿using Research_science.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,6 +13,8 @@ namespace Research_science.Controllers
     public class HomePageController : Controller
     {
         // GET: HomePage
+        Model1 db = new Model1();
+
         public ActionResult Index()
         {
             return View();
@@ -61,6 +67,72 @@ namespace Research_science.Controllers
         {
             return PartialView();
         }
+
+
+        public static string ConverImageToBase64(string path)
+        {
+            using (Image image = Image.FromFile(path))
+            {
+                using (MemoryStream m = new MemoryStream())
+                {
+                    image.Save(m, image.RawFormat);
+                    byte[] imageBytes = m.ToArray();
+
+                    string base64String = "data:image/jpeg;base64," + Convert.ToBase64String(imageBytes);
+                    return base64String;
+                }
+            }
+        }
+
+
+        [HttpGet]
+        public ActionResult CustomerProfile()
+        {
+            if (Session["UserName"] != null)
+            {
+                if (Session["UserName"] is Customer customer)
+                {
+                    
+                    customer.MatKhauNL = customer.Password;
+
+                    return View(customer);
+                }
+                else
+                {
+                    return RedirectToAction("Error");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult CustomerProfile(Customer model, HttpPostedFileBase myFile)
+        {
+
+
+            if (ModelState.IsValid)
+            {
+
+
+                if (myFile != null)
+                {
+                    Image img = Image.FromStream(myFile.InputStream, true, true);
+                    //model.Avatar = Utility.ConvertImageToBase64(img);
+                }
+
+                db.Customer.AddOrUpdate(model);
+                db.SaveChanges();
+                Session["UserName"] = model;
+            }
+
+
+            return View(model);
+        }
+
 
     }
 }

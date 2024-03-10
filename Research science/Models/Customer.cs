@@ -39,6 +39,7 @@
         //[Compare("Password")]
         public string MatKhauNL { get; set; }
 
+        [Required(ErrorMessage = "FullName không được để trống")]
         [StringLength(255)]
         public string Fullname { get; set; }
 

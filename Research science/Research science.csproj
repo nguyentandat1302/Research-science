@@ -135,17 +135,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202403100621340_zxcv.cs" />
-    <Compile Include="Migrations\202403100621340_zxcv.designer.cs">
-      <DependentUpon>202403100621340_zxcv.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202403100700343_dghj.cs" />
-    <Compile Include="Migrations\202403100700343_dghj.designer.cs">
-      <DependentUpon>202403100700343_dghj.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202403100737282_dlfb.cs" />
-    <Compile Include="Migrations\202403100737282_dlfb.designer.cs">
-      <DependentUpon>202403100737282_dlfb.cs</DependentUpon>
+    <Compile Include="Migrations\202403101508470_tandatq.cs" />
+    <Compile Include="Migrations\202403101508470_tandatq.designer.cs">
+      <DependentUpon>202403101508470_tandatq.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -229,6 +221,7 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Shared\NavBarDetail.cshtml" />
     <Content Include="Views\Shared\Contract.cshtml" />
+    <Content Include="Views\HomePage\CustomerProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -261,14 +254,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202403100621340_zxcv.resx">
-      <DependentUpon>202403100621340_zxcv.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202403100700343_dghj.resx">
-      <DependentUpon>202403100700343_dghj.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202403100737282_dlfb.resx">
-      <DependentUpon>202403100737282_dlfb.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202403101508470_tandatq.resx">
+      <DependentUpon>202403101508470_tandatq.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

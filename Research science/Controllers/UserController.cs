@@ -1,6 +1,9 @@
 ﻿using Research_science.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -34,9 +37,11 @@ namespace Research_science.Controllers
 
                 db.Employer.Add(Model);
                 db.SaveChanges();
-                return View("Login");
 
+                // Chuyển hướng đến trang "Login"
+                return RedirectToAction("Login", "User");
             }
+
             return View(Model);
         }
         [HttpGet]
@@ -58,11 +63,14 @@ namespace Research_science.Controllers
 
                 db.Customer.Add(Model);
                 db.SaveChanges();
-                return View("Login");
 
+                // Chuyển hướng đến trang "Login"
+                return RedirectToAction("Login", "User"); 
             }
+
             return View(Model);
         }
+
         [HttpGet]
         public ActionResult Login()
         {
@@ -82,7 +90,7 @@ namespace Research_science.Controllers
                     Session["IDCustomer"] = customer.IDCustomer;
                     Session["UserName"] = customer.UserName;
                     Session["Customer"] = customer;
-                    return RedirectToAction("Navbar", "HomePage");
+                    return RedirectToAction("Index", "HomePage");
                 }
                 else if (employer != null)
                 {
@@ -106,6 +114,10 @@ namespace Research_science.Controllers
             Session["UserName"] = null;
             return Redirect("~/");
         }
+
+       
+
+
 
 
     }
