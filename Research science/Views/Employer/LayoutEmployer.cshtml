@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+    <div class="row bottom" style="margin-bottom:0px">
+        <div style="background-color:darkblue">
+            @Html.Action("FooterEmployer", "Employer")
+        </div>
+    </div>
+</body>
+</html>

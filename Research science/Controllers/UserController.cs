@@ -96,7 +96,7 @@ namespace Research_science.Controllers
                 {
                     // Đăng nhập là nhà tuyển dụng
                     Session["Employer"] = employer;
-                    return RedirectToAction("Navbar", "HomePage", new { Area = "Employer" });
+                    return RedirectToAction("Menu", "Employer", new { Area = "Employer" });
                 }
                 else
                 {

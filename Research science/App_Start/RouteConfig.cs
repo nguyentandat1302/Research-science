@@ -18,6 +18,7 @@ namespace Research_science
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "HomePage", action = "Index", id = UrlParameter.Optional }
             );
+
         }
     }
 }

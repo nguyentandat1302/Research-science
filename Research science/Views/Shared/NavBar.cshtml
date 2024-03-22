@@ -35,7 +35,7 @@
                         <a class="dropdown-toggle btn" data-toggle="dropdown" aria-expanded="false" style="background-color: azure; color: darkblue; font-weight: 500">@customer.Fullname</a>
                         <ul class="dropdown-menu text-light">
                             <li><a class="dropdown-item" href="@Url.Action("CustomerProfile", "HomePage")">Profile</a></li>
-                            <li><a class="dropdown-item" href="@Url.Action("BookingHistory","User")">Booking history</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("ChatBox", "HomePage")">Message</a></li>
                             <li><a class="dropdown-item" href="@Url.Action("Logout","User")">Log out</a></li>
                         </ul>
                     </div>
@@ -48,6 +48,11 @@
                         <a class="btn" style="background-color:azure;color:darkred;font-weight:500" href="@Url.Action("Login", "User")">Sign in</a>
                     </div>
                 }
+
+                @if (!Context.IsCustomErrorEnabled)
+                {
+                }
+
             </div>
             <div class="row">
                 <ul class="nav nav-pills">

@@ -45,6 +45,12 @@
         [StringLength(255)]
         public string Email { get; set; }
 
+        [StringLength(255)]
+        public string Description { get; set; }
+
+        [StringLength(255)]
+        public string Address { get; set; }
+
         [StringLength(15)]
         public string Phone { get; set; }
 

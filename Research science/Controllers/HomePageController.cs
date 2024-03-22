@@ -1,6 +1,7 @@
 ﻿using Research_science.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.IO;
@@ -31,7 +32,7 @@ namespace Research_science.Controllers
         {
             return PartialView();
         }
-         public ActionResult Video()
+        public ActionResult Video()
         {
             return PartialView();
         }
@@ -84,17 +85,18 @@ namespace Research_science.Controllers
             }
         }
 
-
         [HttpGet]
         public ActionResult CustomerProfile()
         {
+
             if (Session["UserName"] != null)
             {
-                if (Session["UserName"] is Customer customer)
-                {
-                    
-                    customer.MatKhauNL = customer.Password;
+                var customer = (Customer)Session["Customer"];
+                // Lấy thông tin hồ sơ từ cơ sở dữ liệu dựa trên ID
+                customer.MatKhauNL = customer.Password;
 
+                if (customer != null)
+                {
                     return View(customer);
                 }
                 else
@@ -107,13 +109,10 @@ namespace Research_science.Controllers
                 return RedirectToAction("Error");
             }
         }
-
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult CustomerProfile(Customer model, HttpPostedFileBase myFile)
         {
-
-
             if (ModelState.IsValid)
             {
 
@@ -132,7 +131,11 @@ namespace Research_science.Controllers
 
             return View(model);
         }
-
+        public ActionResult ChatBox() 
+        {
+            return View();
+        }
+    
 
     }
 }

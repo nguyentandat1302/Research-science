@@ -130,6 +130,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\EmployerController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -138,6 +139,10 @@
     <Compile Include="Migrations\202403101508470_tandatq.cs" />
     <Compile Include="Migrations\202403101508470_tandatq.designer.cs">
       <DependentUpon>202403101508470_tandatq.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403221017092_qsss.cs" />
+    <Compile Include="Migrations\202403221017092_qsss.designer.cs">
+      <DependentUpon>202403221017092_qsss.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -171,8 +176,14 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Item\ChatBox.css" />
+    <Content Include="Content\Item\FooterEmployer.css" />
+    <Content Include="Content\Item\Index.css" />
     <Content Include="Content\Item\Login.css" />
+    <Content Include="Content\Item\MessEmployer.css" />
     <Content Include="Content\Item\NavBar.css" />
+    <Content Include="Content\Item\PaymentEmployer.css" />
+    <Content Include="Content\Item\ProfileEmployer.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -222,6 +233,14 @@
     <Content Include="Views\Shared\NavBarDetail.cshtml" />
     <Content Include="Views\Shared\Contract.cshtml" />
     <Content Include="Views\HomePage\CustomerProfile.cshtml" />
+    <Content Include="Views\HomePage\ChatBox.cshtml" />
+    <Content Include="Views\Employer\LayoutEmployer.cshtml" />
+    <Content Include="Views\Employer\FooterEmployer.cshtml" />
+    <Content Include="Views\Employer\Index.cshtml" />
+    <Content Include="Views\Employer\MessEmployer.cshtml" />
+    <Content Include="Views\Employer\ProfileEmployer.cshtml" />
+    <Content Include="Views\Employer\PaymentEmployer.cshtml" />
+    <Content Include="Views\Employer\Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -256,6 +275,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202403101508470_tandatq.resx">
       <DependentUpon>202403101508470_tandatq.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403221017092_qsss.resx">
+      <DependentUpon>202403221017092_qsss.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
