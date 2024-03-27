@@ -58,9 +58,11 @@ namespace Research_science.Controllers
         [HttpGet]
         public ActionResult ProfileEmployer()
         {
-            if (Session["UserName"] != null)
+            
+            //Cai nay bi null
+            if (Session["Employer"] != null)
             {
-                var employer = (Employer)Session["UserName"];
+                var employer = (Employer)Session["Employer"];
                 if (employer != null)
                 {
                     return View(employer);
@@ -72,6 +74,7 @@ namespace Research_science.Controllers
             }
             else
             {
+                //Nen xuong day
                 return RedirectToAction("Error");
             }
         }
@@ -116,10 +119,39 @@ namespace Research_science.Controllers
         {
             return PartialView();
         }
-        public ActionResult MessEmployer()
+
+        [HttpGet]
+        public ActionResult MessEmployer(int customerId,int employerId)
         {
-            return PartialView();
+            // Lấy tin nhắn giữa employer và customer từ cơ sở dữ liệu
+            var messages = db.Message.Where(m => m.IDEmployer == employerId && m.IDCustomer == customerId).ToList();
+
+            // Truyền dữ liệu tin nhắn vào view
+            return PartialView(messages);
         }
 
+        // Phương thức để gửi tin nhắn từ employer
+        [HttpPost]
+        public ActionResult SendMessageFromEmployer(int customerId, string messageContent)
+        {
+            // Tạo một tin nhắn mới
+            var newMessage = new Message
+            {
+                IDCustomer = customerId,
+                Content = messageContent,
+                SendDate = DateTime.Now
+                // Thêm các trường dữ liệu khác nếu cần
+            };
+
+            // Lưu tin nhắn vào cơ sở dữ liệu
+            db.Message.Add(newMessage);
+            db.SaveChanges();
+
+            // Chuyển hướng lại đến trang MessEmployer với dữ liệu đã được cập nhật
+            return RedirectToAction("MessEmployer", new { customerId });
+        
     }
+
+
+}
 }

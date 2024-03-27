@@ -12,44 +12,40 @@ namespace Research_science.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Job()
         {
-            Message = new HashSet<Message>();
-            Payment = new HashSet<Payment>();
-            Proposal = new HashSet<Proposal>();
+            Apply = new HashSet<Apply>();
+            Language = new HashSet<Language>();
+            Skill = new HashSet<Skill>();
         }
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IDJob { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int JobID { get; set; }
+
+        [StringLength(100)]
+        public string JobName { get; set; }
+
+        public int? IdLocation { get; set; }
+
+        public int? UserID { get; set; }
 
         [StringLength(255)]
         public string Title { get; set; }
 
-        [Column(TypeName = "text")]
+        [StringLength(255)]
         public string Description { get; set; }
 
-        public decimal? Budget { get; set; }
-
-        [Column(TypeName = "date")]
-        public DateTime? Deadline { get; set; }
-
-        [StringLength(50)]
-        public string Status { get; set; }
-
-        public int? IDCustomer { get; set; }
-
-        public int? IDEmployer { get; set; }
-
-        public virtual Customer Customer { get; set; }
-
-        public virtual Employer Employer { get; set; }
+        public int? Budget { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Message> Message { get; set; }
+        public virtual ICollection<Apply> Apply { get; set; }
+
+        public virtual Location Location { get; set; }
+
+        public virtual Users Users { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Payment> Payment { get; set; }
+        public virtual ICollection<Language> Language { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Proposal> Proposal { get; set; }
+        public virtual ICollection<Skill> Skill { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 
 namespace Research_science.Controllers
@@ -131,11 +132,37 @@ namespace Research_science.Controllers
 
             return View(model);
         }
-        public ActionResult ChatBox() 
+        public ActionResult ChatBox(int employerId , int customerId)
         {
-            return View();
-        }
-    
+            // Lấy tin nhắn giữa customer và employer từ cơ sở dữ liệu
+            var messages = db.Message.Where(m => m.IDCustomer == customerId && m.IDEmployer == employerId).ToList();
 
+            // Truyền dữ liệu tin nhắn vào view
+            return View(messages);
+        }
+
+        // Phương thức để gửi tin nhắn từ customer
+        [HttpPost]
+        public ActionResult SendMessageFromCustomer(int employerId, string messageContent)
+        {
+            // Tạo một tin nhắn mới
+            var newMessage = new Message
+            {
+                IDEmployer = employerId,
+                Content = messageContent,
+                SendDate = DateTime.Now
+                // Thêm các trường dữ liệu khác nếu cần
+            };
+
+            // Lưu tin nhắn vào cơ sở dữ liệu
+            db.Message.Add(newMessage);
+            db.SaveChanges();
+
+            // Chuyển hướng lại đến trang ChatCustomer với dữ liệu đã được cập nhật
+            return RedirectToAction("ChatBox", new { employerId });
+        }
     }
 }
+    
+
+   

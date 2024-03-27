@@ -6,22 +6,25 @@ namespace Research_science.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Skill")]
-    public partial class Skill
+    [Table("Location")]
+    public partial class Location
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Skill()
+        public Location()
         {
             Job = new HashSet<Job>();
         }
 
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int SkillID { get; set; }
+        public int IdLocation { get; set; }
 
         [StringLength(100)]
-        public string SkillName { get; set; }
+        public string Country { get; set; }
 
-        public int? Experience { get; set; }
+        public int? Latitude { get; set; }
+
+        public int? Longitude { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Job> Job { get; set; }

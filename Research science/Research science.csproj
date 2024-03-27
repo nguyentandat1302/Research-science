@@ -136,13 +136,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202403101508470_tandatq.cs" />
-    <Compile Include="Migrations\202403101508470_tandatq.designer.cs">
-      <DependentUpon>202403101508470_tandatq.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202403221017092_qsss.cs" />
-    <Compile Include="Migrations\202403221017092_qsss.designer.cs">
-      <DependentUpon>202403221017092_qsss.cs</DependentUpon>
+    <Compile Include="Migrations\202403230752584_qwwe.cs" />
+    <Compile Include="Migrations\202403230752584_qwwe.designer.cs">
+      <DependentUpon>202403230752584_qwwe.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -273,11 +269,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202403101508470_tandatq.resx">
-      <DependentUpon>202403101508470_tandatq.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202403221017092_qsss.resx">
-      <DependentUpon>202403221017092_qsss.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202403230752584_qwwe.resx">
+      <DependentUpon>202403230752584_qwwe.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

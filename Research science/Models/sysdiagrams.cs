@@ -20,6 +20,5 @@ namespace Research_science.Models
         public int? version { get; set; }
 
         public byte[] definition { get; set; }
-
     }
 }

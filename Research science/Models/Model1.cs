@@ -8,75 +8,35 @@ namespace Research_science.Models
     public partial class Model1 : DbContext
     {
         public Model1()
-            : base("name=Model11")
+            : base("name=Model1")
         {
         }
 
-        public virtual DbSet<Customer> Customer { get; set; }
-        public virtual DbSet<Employer> Employer { get; set; }
+        public virtual DbSet<Apply> Apply { get; set; }
         public virtual DbSet<Job> Job { get; set; }
-        public virtual DbSet<Message> Message { get; set; }
-        public virtual DbSet<Payment> Payment { get; set; }
-        public virtual DbSet<Proposal> Proposal { get; set; }
+        public virtual DbSet<Language> Language { get; set; }
+        public virtual DbSet<LoaiUser> LoaiUser { get; set; }
+        public virtual DbSet<Location> Location { get; set; }
         public virtual DbSet<Skill> Skill { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Customer>()
-                .Property(e => e.UserName)
+            modelBuilder.Entity<Apply>()
+                .Property(e => e.CV)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Customer>()
-                .Property(e => e.Password)
+            modelBuilder.Entity<Apply>()
+                .Property(e => e.Coverletter)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Customer>()
-                .Property(e => e.Fullname)
+            modelBuilder.Entity<Apply>()
+                .Property(e => e.Address)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Customer>()
-                .Property(e => e.Email)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Customer>()
-                .Property(e => e.PhoneNumber)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Customer>()
-                .Property(e => e.Avatar)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Customer>()
-                .Property(e => e.Role)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Employer>()
-                .Property(e => e.UserName)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Employer>()
-                .Property(e => e.Password)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Employer>()
-                .Property(e => e.CompanyName)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Employer>()
-                .Property(e => e.Email)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Employer>()
-                .Property(e => e.Phone)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Employer>()
-                .Property(e => e.Avatar)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Employer>()
-                .Property(e => e.Role)
+            modelBuilder.Entity<Job>()
+                .Property(e => e.JobName)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Job>()
@@ -88,35 +48,57 @@ namespace Research_science.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Job>()
-                .Property(e => e.Budget)
-                .HasPrecision(10, 2);
+                .HasMany(e => e.Language)
+                .WithMany(e => e.Job)
+                .Map(m => m.ToTable("JobLanguage").MapLeftKey("JobID").MapRightKey("LanguageID"));
 
             modelBuilder.Entity<Job>()
-                .Property(e => e.Status)
+                .HasMany(e => e.Skill)
+                .WithMany(e => e.Job)
+                .Map(m => m.ToTable("JobSkill").MapLeftKey("JobID").MapRightKey("SkillID"));
+
+            modelBuilder.Entity<Language>()
+                .Property(e => e.NameLanguage)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Message>()
-                .Property(e => e.Content)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Payment>()
-                .Property(e => e.Amount)
-                .HasPrecision(10, 2);
-
-            modelBuilder.Entity<Payment>()
+            modelBuilder.Entity<Language>()
                 .Property(e => e.Description)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Proposal>()
-                .Property(e => e.Status)
+            modelBuilder.Entity<LoaiUser>()
+                .Property(e => e.TenLoai)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Proposal>()
-                .Property(e => e.ProposalText)
+            modelBuilder.Entity<Location>()
+                .Property(e => e.Country)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Skill>()
                 .Property(e => e.SkillName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Users>()
+                .Property(e => e.LogoCompany)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Users>()
+                .Property(e => e.Image)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Users>()
+                .Property(e => e.UserName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Users>()
+                .Property(e => e.Password)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Users>()
+                .Property(e => e.Email)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Users>()
+                .Property(e => e.Wallet)
                 .IsUnicode(false);
         }
     }

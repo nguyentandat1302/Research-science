@@ -1,56 +1,30 @@
-﻿<div class="position-relative p-0 m-0">
-    <div id="imageCarousel1" class="carousel slide" data-ride="carousel" data-interval="5000">
+﻿
+<div class="container-fluid position-relative p-0 m-0">
+    <div id="imageCarousel2" class="carousel slide" data-ride="carousel" data-interval="5000">
         <div class="carousel-indicators">
             <!-- Indicators -->
-            <button type="button" data-bs-target="#imageCarousel1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#imageCarousel1" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#imageCarousel1" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#imageCarousel2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#imageCarousel2" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#imageCarousel2" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-        <div class="carousel-inner carousel-inner-ok">
+        <div class="carousel-inner carousel-inner-no">
             <!-- Carousel Items -->
-            <div class="carousel-item active position-relative">
-                <!-- Left half black pane -->
-                <div class="right-pane"></div>
-                <!-- Image -->
-                <img src="https://images.pexels.com/photos/3194518/pexels-photo-3194518.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="d-block w-100" alt="Image 1">
-                <!-- Content on the left half -->
-                <div class="carousel-content">
-                    <h2>Your Title</h2>
-                    <p>Your description goes here.</p>
-                    <a class="btn btn-info" href="@Url.Action("Stays","HomePage")">Learn More</a>
-                </div>
+            <div class="carousel-item active">
+                <img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="d-block w-100" alt="Image 1">
             </div>
-            <div class="carousel-item position-relative">
-
-                <div class="right-pane"></div>
-                <!-- Image -->
-                <img src="https://images.pexels.com/photos/56759/pexels-photo-56759.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="d-block w-100" alt="Image 2">
-                <!-- Content on the left half -->
-                <div class="carousel-content">
-                    <h2>Your Title</h2>
-                    <p>Your description goes here.</p>
-                    <a class="btn btn-info" href="@Url.Action("Stays","HomePage")">Learn More</a>
-                </div>
+            <div class="carousel-item">
+                <img src="https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="d-block w-100" alt="Image 2">
             </div>
-            <div class="carousel-item position-relative">
-
-                <div class="right-pane"></div>
-                <!-- Image -->
-                <img src="https://images.pexels.com/photos/5950051/pexels-photo-5950051.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="d-block w-100" alt="Image 3">
-                <!-- Content on the left half -->
-                <div class="carousel-content">
-                    <h2>Your Title</h2>
-                    <p>Your description goes here.</p>
-                    <a class="btn btn-info" href="@Url.Action("Stays","HomePage")">Learn More</a>
-                </div>
+            <div class="carousel-item">
+                <img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="d-block w-100" alt="Image 3">
             </div>
         </div>
         <!-- Carousel Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel1" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel2" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel1" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel2" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
@@ -58,43 +32,23 @@
     <!-- Include Bootstrap's JavaScript files -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    <style>
-        /* Style for the right half black pane */
-        .right-pane {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 50%; /* Right half */
-            height: 100%;
-            background: linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent);
-        }
 
-        /* Style for the content on the right half */
-        .carousel-content {
-            position: absolute;
-            top: 50%;
-            right: 10%;
-            transform: translate(0, -50%);
-            color: white;
-            text-align: right;
-        }
-    </style>
     <script>
         function prevSlide() {
-            $('#imageCarousel1').carousel('prev');
+            $('#imageCarousel2').carousel('prev');
         }
 
         function nextSlide() {
-            $('#imageCarousel1').carousel('next');
+            $('#imageCarousel2').carousel('next');
         }
 
         // Pause auto-slide on mouseover
-        $('#imageCarousel1').mouseover(function () {
+        $('#imageCarousel2').mouseover(function () {
             $(this).carousel('pause');
         });
 
         // Resume auto-slide on mouseout
-        $('#imageCarousel1').mouseout(function () {
+        $('#imageCarousel2').mouseout(function () {
             $(this).carousel('cycle');
         });
     </script>
