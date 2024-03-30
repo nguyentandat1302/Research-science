@@ -20,9 +20,9 @@
                 </a>
             </div>
             <div>
-                @if (Session["UserName"] != null)
+                @*@if (Session["UserName"] != null)
                 {
-                    var customer = (Research_science.Models.Customer)Session["customer"];
+                    var customer = (Research_science.Models.Users)Session["customer"];
                     <div style="float: right" class="dropdown">
                         @if (customer != null && customer.Avatar != null)
                         {
@@ -39,7 +39,7 @@
                             <li><a class="dropdown-item" href="@Url.Action("Logout","User")">Log out</a></li>
                         </ul>
                     </div>
-                }
+                }*@
                 else
                 {
                     <div style="float:right">

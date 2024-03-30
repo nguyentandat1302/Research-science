@@ -20,9 +20,9 @@ namespace Research_science.Controllers
         [HttpGet]
         public ActionResult Menu()
         {
-            if (Session["Employer"] != null)
+            if (Session["Users"] != null)
             {
-                var employer = (Employer)Session["Employer"];
+                var employer = (Users)Session["Users"];
                 return View(employer);
             }
             else
@@ -33,20 +33,20 @@ namespace Research_science.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Menu(Employer model, HttpPostedFileBase myFile)
+        public ActionResult Menu(Users model, HttpPostedFileBase myFile)
         {
             if (ModelState.IsValid)
             {
                 if (myFile != null)
                 {
                     Image img = Image.FromStream(myFile.InputStream, true, true);
-                    //model.Avatar = Utility.ConvertImageToBase64(img);
+                    model.Image = Utility.ConvertImageToBase64(img);
                 }
 
-                db.Employer.AddOrUpdate(model);
+                db.Users    .AddOrUpdate(model);
                 db.SaveChanges();
 
-                Session["Employer"] = model;
+                Session["Users"] = model;
             }
             return View(model);
         }
@@ -55,102 +55,102 @@ namespace Research_science.Controllers
 
 
 
-        [HttpGet]
-        public ActionResult ProfileEmployer()
-        {
+    //    [HttpGet]
+    //    public ActionResult ProfileEmployer()
+    //    {
             
-            //Cai nay bi null
-            if (Session["Employer"] != null)
-            {
-                var employer = (Employer)Session["Employer"];
-                if (employer != null)
-                {
-                    return View(employer);
-                }
-                else
-                {
-                    return RedirectToAction("Error");
-                }
-            }
-            else
-            {
-                //Nen xuong day
-                return RedirectToAction("Error");
-            }
-        }
+    //        //Cai nay bi null
+    //        if (Session["Employer"] != null)
+    //        {
+    //            //var employer = (Employer)Session["Employer"];
+    //            //if (employer != null)
+    //            {
+    //                return View(employer);
+    //            }
+    //            else
+    //            {
+    //                return RedirectToAction("Error");
+    //            }
+    //        }
+    //        else
+    //        {
+    //            //Nen xuong day
+    //            return RedirectToAction("Error");
+    //        }
+    //    }
 
-        [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult ProfileEmployer(Employer model)
-        {
-            if (ModelState.IsValid)
-            {
-                var existingEmployer = db.Employer.FirstOrDefault(e => e.IDEmployer == model.IDEmployer);
-                if (existingEmployer != null)
-                {
+    //    [HttpPost]
+    //    [ValidateInput(false)]
+    //    public ActionResult ProfileEmployer(Employer model)
+    //    {
+    //        if (ModelState.IsValid)
+    //        {
+    //            var existingEmployer = db.Employer.FirstOrDefault(e => e.IDEmployer == model.IDEmployer);
+    //            if (existingEmployer != null)
+    //            {
                    
 
-                    db.SaveChanges();
-                    Session["UserName"] = existingEmployer;
-                }
-                else
-                {
-                    db.Employer.Add(model);
-                    db.SaveChanges();
-                    Session["UserName"] = model;
-                }
+    //                db.SaveChanges();
+    //                Session["UserName"] = existingEmployer;
+    //            }
+    //            else
+    //            {
+    //                db.Employer.Add(model);
+    //                db.SaveChanges();
+    //                Session["UserName"] = model;
+    //            }
 
-                return RedirectToAction("ProfileEmployer");
-            }
+    //            return RedirectToAction("ProfileEmployer");
+    //        }
 
-            return View(model);
-        }
+    //        return View(model);
+    //    }
 
     
 
 
 
-    public ActionResult PaymentEmployer() 
-        {
-            return PartialView();
-        }
+    //public ActionResult PaymentEmployer() 
+    //    {
+    //        return PartialView();
+    //    }
 
-        public ActionResult FooterEmployer()
-        {
-            return PartialView();
-        }
+    //    public ActionResult FooterEmployer()
+    //    {
+    //        return PartialView();
+    //    }
 
-        [HttpGet]
-        public ActionResult MessEmployer(int customerId,int employerId)
-        {
-            // Lấy tin nhắn giữa employer và customer từ cơ sở dữ liệu
-            var messages = db.Message.Where(m => m.IDEmployer == employerId && m.IDCustomer == customerId).ToList();
+    //    [HttpGet]
+    //    public ActionResult MessEmployer(int customerId,int employerId)
+    //    {
+    //        // Lấy tin nhắn giữa employer và customer từ cơ sở dữ liệu
+    //        var messages = db.Message.Where(m => m.IDEmployer == employerId && m.IDCustomer == customerId).ToList();
 
-            // Truyền dữ liệu tin nhắn vào view
-            return PartialView(messages);
-        }
+    //        // Truyền dữ liệu tin nhắn vào view
+    //        return PartialView(messages);
+    //    }
 
-        // Phương thức để gửi tin nhắn từ employer
-        [HttpPost]
-        public ActionResult SendMessageFromEmployer(int customerId, string messageContent)
-        {
-            // Tạo một tin nhắn mới
-            var newMessage = new Message
-            {
-                IDCustomer = customerId,
-                Content = messageContent,
-                SendDate = DateTime.Now
-                // Thêm các trường dữ liệu khác nếu cần
-            };
+    //    // Phương thức để gửi tin nhắn từ employer
+    //    [HttpPost]
+    //    public ActionResult SendMessageFromEmployer(int customerId, string messageContent)
+    //    {
+    //        // Tạo một tin nhắn mới
+    //        var newMessage = new Message
+    //        {
+    //            IDCustomer = customerId,
+    //            Content = messageContent,
+    //            SendDate = DateTime.Now
+    //            // Thêm các trường dữ liệu khác nếu cần
+    //        };
 
-            // Lưu tin nhắn vào cơ sở dữ liệu
-            db.Message.Add(newMessage);
-            db.SaveChanges();
+    //        // Lưu tin nhắn vào cơ sở dữ liệu
+    //        db.Message.Add(newMessage);
+    //        db.SaveChanges();
 
-            // Chuyển hướng lại đến trang MessEmployer với dữ liệu đã được cập nhật
-            return RedirectToAction("MessEmployer", new { customerId });
+    //        // Chuyển hướng lại đến trang MessEmployer với dữ liệu đã được cập nhật
+    //        return RedirectToAction("MessEmployer", new { customerId });
         
-    }
+    //}
 
 
 }

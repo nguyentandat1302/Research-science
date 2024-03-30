@@ -24,48 +24,47 @@ namespace Research_science.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult SignUp(Employer Model)
+        public ActionResult SignUp(Users Model)
         {
             if (ModelState.IsValid)
             {
-                var kh = db.Employer.FirstOrDefault(k => k.UserName == Model.UserName);
+                var kh = db.Users.FirstOrDefault(k => k.UserName == Model.UserName);
                 if (kh != null)
                 {
                     ModelState.AddModelError("UserName", "This account has already existed");
                     return View(Model);
                 }
 
-                db.Employer.Add(Model);
+                db.Users.Add(Model);
                 db.SaveChanges();
 
-                // Chuyển hướng đến trang "Login"
+             
                 return RedirectToAction("Login", "User");
             }
 
             return View(Model);
         }
         [HttpGet]
-        public ActionResult Register() 
+        public ActionResult Register()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult Register(Customer Model)
+        public ActionResult Register(Users Model)
         {
             if (ModelState.IsValid)
             {
-                var kh = db.Customer.FirstOrDefault(k => k.UserName == Model.UserName);
+                var kh = db.Users.FirstOrDefault(k => k.UserName == Model.UserName);
                 if (kh != null)
                 {
                     ModelState.AddModelError("UserName", "This account has already existed");
                     return View(Model);
                 }
 
-                db.Customer.Add(Model);
+                db.Users.Add(Model);
                 db.SaveChanges();
 
-                // Chuyển hướng đến trang "Login"
-                return RedirectToAction("Login", "User"); 
+                return RedirectToAction("Login", "User");
             }
 
             return View(Model);
@@ -81,27 +80,27 @@ namespace Research_science.Controllers
         {
             if (ModelState.IsValid)
             {
-                var customer = db.Customer.FirstOrDefault(k => k.UserName == user.UserName && k.Password == user.Password);
-                var employer = db.Employer.FirstOrDefault(k => k.UserName == user.UserName && k.Password == user.Password);
+                var customer = db.Users.FirstOrDefault(k => k.UserName == user.UserName && k.Password == user.Password);
+                var employer = db.Users.FirstOrDefault(k => k.UserName == user.UserName && k.Password == user.Password);
 
-                if (customer != null)
-                {
-                    // Đăng nhập là khách hàng
-                    Session["IDCustomer"] = customer.IDCustomer;
-                    Session["UserName"] = customer.UserName;
-                    Session["Customer"] = customer;
-                    return RedirectToAction("Index", "HomePage");
-                }
-                else if (employer != null)
-                {
-                    // Đăng nhập là nhà tuyển dụng
-                    Session["Employer"] = employer;
-                    return RedirectToAction("Menu", "Employer", new { Area = "Employer" });
-                }
-                else
-                {
-                    ModelState.AddModelError("Password", "Tài khoản không tồn tại hoặc mật khẩu không đúng.");
-                }
+                //if (customer != null)
+                //{
+                //    // Đăng nhập là khách hàng
+                //    Session["IDCustomer"] = customer.IDCustomer;
+                //    Session["UserName"] = customer.UserName;
+                //    Session["Customer"] = customer;
+                //    return RedirectToAction("Index", "HomePage");
+                //}
+                //else if (employer != null)
+                //{
+                //    // Đăng nhập là nhà tuyển dụng
+                //    Session["Employer"] = employer;
+                //    return RedirectToAction("Menu", "Employer", new { Area = "Employer" });
+                //}
+                //else
+                //{
+                //    ModelState.AddModelError("Password", "Tài khoản không tồn tại hoặc mật khẩu không đúng.");
+                //}
             }
 
             return View();

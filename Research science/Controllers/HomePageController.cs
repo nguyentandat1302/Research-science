@@ -86,81 +86,82 @@ namespace Research_science.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult CustomerProfile()
-        {
+        //    [HttpGet]
+        //    public ActionResult CustomerProfile()
+        //    {
 
-            if (Session["UserName"] != null)
-            {
-                var customer = (Customer)Session["Customer"];
-                // Lấy thông tin hồ sơ từ cơ sở dữ liệu dựa trên ID
-                customer.MatKhauNL = customer.Password;
+        //        if (Session["UserName"] != null)
+        //        {
+        //            var customer = (Customer)Session["Customer"];
+        //            // Lấy thông tin hồ sơ từ cơ sở dữ liệu dựa trên ID
+        //            customer.MatKhauNL = customer.Password;
 
-                if (customer != null)
-                {
-                    return View(customer);
-                }
-                else
-                {
-                    return RedirectToAction("Error");
-                }
-            }
-            else
-            {
-                return RedirectToAction("Error");
-            }
-        }
-        [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult CustomerProfile(Customer model, HttpPostedFileBase myFile)
-        {
-            if (ModelState.IsValid)
-            {
-
-
-                if (myFile != null)
-                {
-                    Image img = Image.FromStream(myFile.InputStream, true, true);
-                    //model.Avatar = Utility.ConvertImageToBase64(img);
-                }
-
-                db.Customer.AddOrUpdate(model);
-                db.SaveChanges();
-                Session["UserName"] = model;
-            }
+        //            if (customer != null)
+        //            {
+        //                return View(customer);
+        //            }
+        //            else
+        //            {
+        //                return RedirectToAction("Error");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            return RedirectToAction("Error");
+        //        }
+        //    }
+        //    [HttpPost]
+        //    [ValidateInput(false)]
+        //    public ActionResult CustomerProfile(Customer model, HttpPostedFileBase myFile)
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
 
 
-            return View(model);
-        }
-        public ActionResult ChatBox(int employerId , int customerId)
-        {
-            // Lấy tin nhắn giữa customer và employer từ cơ sở dữ liệu
-            var messages = db.Message.Where(m => m.IDCustomer == customerId && m.IDEmployer == employerId).ToList();
+        //            if (myFile != null)
+        //            {
+        //                Image img = Image.FromStream(myFile.InputStream, true, true);
+        //                //model.Avatar = Utility.ConvertImageToBase64(img);
+        //            }
 
-            // Truyền dữ liệu tin nhắn vào view
-            return View(messages);
-        }
+        //            db.Customer.AddOrUpdate(model);
+        //            db.SaveChanges();
+        //            Session["UserName"] = model;
+        //        }
 
-        // Phương thức để gửi tin nhắn từ customer
-        [HttpPost]
-        public ActionResult SendMessageFromCustomer(int employerId, string messageContent)
-        {
-            // Tạo một tin nhắn mới
-            var newMessage = new Message
-            {
-                IDEmployer = employerId,
-                Content = messageContent,
-                SendDate = DateTime.Now
-                // Thêm các trường dữ liệu khác nếu cần
-            };
 
-            // Lưu tin nhắn vào cơ sở dữ liệu
-            db.Message.Add(newMessage);
-            db.SaveChanges();
+        //        return View(model);
+        //    }
+        //    public ActionResult ChatBox(int employerId , int customerId)
+        //    {
+        //        // Lấy tin nhắn giữa customer và employer từ cơ sở dữ liệu
+        //        var messages = db.Message.Where(m => m.IDCustomer == customerId && m.IDEmployer == employerId).ToList();
 
-            // Chuyển hướng lại đến trang ChatCustomer với dữ liệu đã được cập nhật
-            return RedirectToAction("ChatBox", new { employerId });
-        }
+        //        // Truyền dữ liệu tin nhắn vào view
+        //        return View(messages);
+        //    }
+
+        //    // Phương thức để gửi tin nhắn từ customer
+        //    [HttpPost]
+        //    public ActionResult SendMessageFromCustomer(int employerId, string messageContent)
+        //    {
+        //        // Tạo một tin nhắn mới
+        //        var newMessage = new Message
+        //        {
+        //            IDEmployer = employerId,
+        //            Content = messageContent,
+        //            SendDate = DateTime.Now
+        //            // Thêm các trường dữ liệu khác nếu cần
+        //        };
+
+        //        // Lưu tin nhắn vào cơ sở dữ liệu
+        //        db.Message.Add(newMessage);
+        //        db.SaveChanges();
+
+        //        // Chuyển hướng lại đến trang ChatCustomer với dữ liệu đã được cập nhật
+        //        return RedirectToAction("ChatBox", new { employerId });
+        //    }
+        //}
     }
 }
     
