@@ -1,0 +1,76 @@
+﻿/* Đặt tên phạm vi */
+.account-settings-custom {
+    /* CSS cho phần user-profile */
+    .user-profile-custom
+
+{
+    margin: 0 0 1rem 0;
+    padding-bottom: 1rem;
+    text-align: center;
+    /* CSS cho user-avatar */
+    .user-avatar-custom
+
+{
+    margin: 0 0 1rem 0;
+    img
+
+{
+    width: 90px;
+    height: 90px;
+    border-radius: 100px;
+}
+
+}
+
+/* CSS cho user-name */
+h5.user-name {
+    margin: 0 0 0.5rem 0;
+}
+
+/* CSS cho user-email */
+h6.user-email {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #9fa8b9;
+}
+
+}
+
+/* CSS cho phần about */
+.about-custom {
+    margin: 2rem 0 0 0;
+    text-align: center;
+    /* CSS cho h5 */
+    h5
+
+{
+    margin: 0 0 15px 0;
+    color: #007ae1;
+}
+
+/* CSS cho paragraph */
+p {
+    font-size: 0.825rem;
+    margin: 0; /* Đặt margin của đoạn văn bản là 0 */
+}
+
+}
+}
+
+/* CSS cho form-control */
+.form-control-custom {
+    border: 1px solid #cfd1d8;
+    border-radius: 2px;
+    font-size: .825rem;
+    background: #ffffff;
+    color: #2e323c;
+}
+
+/* CSS cho card */
+.card-custom {
+    background: #ffffff;
+    border-radius: 5px;
+    border: 0;
+    margin-bottom: 1rem;
+}

@@ -17,7 +17,6 @@ namespace Research_science.Models
             Skill = new HashSet<Skill>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int JobID { get; set; }
 
         [StringLength(100)]
@@ -33,7 +32,12 @@ namespace Research_science.Models
         [StringLength(255)]
         public string Description { get; set; }
 
+
+        public string Anh { get; set; }
+
         public int? Budget { get; set; }
+
+        public bool Accept { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Apply> Apply { get; set; }

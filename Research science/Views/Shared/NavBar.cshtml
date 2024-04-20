@@ -10,6 +10,28 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     @Styles.Render("~/Content/css")
+
+
+    <style>
+        .transparent-input {
+            border: none;
+            background-color: transparent;
+            outline: none;
+            width: calc(100% - 30px); /* Thêm 30px để tạo không gian cho biểu tượng kính lúp */
+            padding: 10px;
+            color: azure;
+            font-size: 16px;
+            background-image: url('path_to_your_search_icon.png'); /* Đường dẫn đến biểu tượng kính lúp */
+            background-size: 40px 40px; /* Kích thước của biểu tượng */
+            background-repeat: no-repeat;
+            background-position: left 10px top; /* Vị trí của biểu tượng */
+        }
+
+            .transparent-input::placeholder {
+                color: azure; /* Màu chữ của placeholder */
+            }
+    </style>
+
 </head>
 <body>
     <div>
@@ -20,26 +42,28 @@
                 </a>
             </div>
             <div>
-                @*@if (Session["UserName"] != null)
+                @if (Session["UserName"] != null)
                 {
-                    var customer = (Research_science.Models.Users)Session["customer"];
+                    var customer = (Research_science.Models.Users)Session["Freelancer"];
+                    //lúc nảy em có cài trong cái nút là  khi nhần vào mà chưa đăng nhập thì nó trả về trang chủ , mà sao em đăng nhập rồi nó vẫn trả về ạ
+
                     <div style="float: right" class="dropdown">
-                        @if (customer != null && customer.Avatar != null)
+                        @if (customer != null && customer.Image != null)
                         {
-                            <img src="@customer.Avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;" />
+                            <img src="@customer.Image" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;" />
                         }
                         else
                         {
                             <img src="https://e7.pngegg.com/pngimages/84/165/png-clipart-united-states-avatar-organization-information-user-avatar-service-computer-wallpaper-thumbnail.png" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;" />
                         }
-                        <a class="dropdown-toggle btn" data-toggle="dropdown" aria-expanded="false" style="background-color: azure; color: darkblue; font-weight: 500">@customer.Fullname</a>
+                        <a class="dropdown-toggle btn" data-toggle="dropdown" aria-expanded="false" style="background-color: azure; color: darkblue; font-weight: 500">@*@customer.FullName*@</a>
                         <ul class="dropdown-menu text-light">
-                            <li><a class="dropdown-item" href="@Url.Action("CustomerProfile", "HomePage")">Profile</a></li>
-                            <li><a class="dropdown-item" href="@Url.Action("ChatBox", "HomePage")">Message</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("CustomerProfile", "HomePage")">Management CV</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("Applied", "Merger")">Applied Job</a></li>
                             <li><a class="dropdown-item" href="@Url.Action("Logout","User")">Log out</a></li>
                         </ul>
                     </div>
-                }*@
+                }
                 else
                 {
                     <div style="float:right">
@@ -49,77 +73,113 @@
                     </div>
                 }
 
-                @if (!Context.IsCustomErrorEnabled)
-                {
-                }
+
+
 
             </div>
             <div class="row">
                 <ul class="nav nav-pills">
                     <li class="nav-item dropdown" style="padding-right:20px">
                         <a class="btn dropdown-toggle" style="font-weight: 300; border-radius: 20px; color: azure; background-color: darkred" href="#" role="button" id="staysDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="material-symbols-outlined" style="vertical-align:middle;font-size:30px">bed</i> Design
+                            <i class="material-icons" style="vertical-align:middle;font-size:30px;color:azure">emoji_symbols</i> Jobs by Skill
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="staysDropdown">
-                            <a class="dropdown-item" href="@Url.Action("Stays","HomePage")">Option 1</a>
-                            <!-- Add more dropdown items if needed -->
+                        <div class="dropdown-menu" aria-labelledby="staysDropdown" style="background-color: darkred;">
+                            @Html.Action("SkillPartial", "HomePage")
+                        </div>
+                    </li>
+
+
+
+                    <li class="nav-item dropdown" style="padding-right:20px">
+                        <a class="btn dropdown-toggle" style="font-weight: 300; border-radius: 20px; color: azure; background-color: darkred" href="#" role="button" id="staysDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons" style="vertical-align:middle;font-size:30px;color:azure">location_city</i> Jobs by City
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="staysDropdown" style="background-color: darkred;">
+                            @Html.Action("CityPartial", "HomePage")
                         </div>
                     </li>
 
                     <li class="nav-item dropdown" style="padding-right:20px">
-                        <a class="btn dropdown-toggle" style="font-weight: 300; border-radius: 20px; color: azure; background-color: darkred" href="#" role="button" id="flightsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="material-symbols-outlined" style="vertical-align:middle;font-size:30px">flight</i> Editor
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="flightsDropdown">
-                            <a class="dropdown-item" href="@Url.Action("Flights","HomePage")">Option 1</a>
-                            <!-- Add more dropdown items if needed -->
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown" style="padding-right:20px">
-                        <a class="btn dropdown-toggle" style="font-weight: 300; border-radius: 20px; color: azure; background-color: darkred" href="#" role="button" id="flightsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="material-symbols-outlined" style="vertical-align:middle;font-size:30px">flight</i> Developer
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="flightsDropdown">
-                            <a class="dropdown-item" href="@Url.Action("Flights","HomePage")">Option 1</a>
-                            <!-- Add more dropdown items if needed -->
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown" style="padding-right:20px">
-                        <a class="btn dropdown-toggle" style="font-weight: 300; border-radius: 20px; color: azure; background-color: darkred" href="#" role="button" id="flightsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="material-symbols-outlined" style="vertical-align:middle;font-size:30px">flight</i> WordP
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="flightsDropdown">
-                            <a class="dropdown-item" href="@Url.Action("Flights","HomePage")">Option 1</a>
-                            <!-- Add more dropdown items if needed -->
-                        </div>
-                    </li>
+                        <a class="btn dropdown-toggle" style="font-weight: 300; border-radius: 20px; color: azure; background-color: darkred" href="#" role="button" id="staysDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons" style="vertical-align:middle;font-size:30px;color:azure">language</i> Jobs by Language
 
-                    <li class="nav-item dropdown">
-                        <a class="btn dropdown-toggle" style="font-weight: 300; border-radius: 20px; color: azure; background-color: darkred" href="#" role="button" id="packagesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="material-symbols-outlined" style="vertical-align:middle;font-size:30px">travel_explore</i> Packages
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="packagesDropdown">
-                            <a class="dropdown-item" href="@Url.Action("Packages","HomePage")">Option 1</a>
-                            <!-- Add more dropdown items if needed -->
+                        <div class="dropdown-menu" aria-labelledby="staysDropdown" style="background-color: darkred;">
+                            @Html.Action("LanguagePartial", "HomePage")
                         </div>
                     </li>
                 </ul>
             </div>
+        </div>
 
-        </div>
-        <div class="row">
-            <ul class="nav nav-pills">
-                <!-- Your dropdown menu items -->
-            </ul>
-        </div>
-        <div class="row" style="padding-top:150px">
-            <p style="font-size:45px;color:azure;font-weight:700">
-                Find your job
-            </p>
-            <p style="font-size:20px;color:azure;font-weight:300">
-                Find more jobs, design, programming, drawing and more...
-            </p>
-        </div>
+
+
+        <form class="navbar-form navbar-left" action="/HomePage/ListCompany" method="get">
+            <div class="row" style="padding-top:150px; position: relative;">
+                <p style="font-size:70px;color:azure;font-weight:700">
+                    Find your job
+                </p>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="transparent-input" style="font-size:20px" placeholder="Find more jobs, design, programming, drawing and more..." name="searchString">
+                        <button type="submit" class="btn btn-base search-button" style="width: auto; padding: 0;">
+                            <?xml version="1.0" encoding="utf-8" ?>
+                            <!-- License: PD. Made by icons8: https://icons8.com/c/flat-color-icons -->
+                            <svg width="800px" height="300px" viewBox="0 0 48 48" version="1" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 48 48" style="width: 30px; height: 30px;">
+                                <g fill="#616161">
+                                    <rect x="34.6" y="28.1" transform="matrix(.707 -.707 .707 .707 -15.154 36.586)" width="4" height="17" />
+                                    <circle cx="20" cy="20" r="16" />
+                                </g>
+                                <rect x="36.2" y="32.1" transform="matrix(.707 -.707 .707 .707 -15.839 38.239)" fill="#37474F" width="4" height="12.3" />
+                                <circle fill="#64B5F6" cx="20" cy="20" r="13" />
+                                <path fill="#BBDEFB" d="M26.9,14.2c-1.7-2-4.2-3.2-6.9-3.2s-5.2,1.2-6.9,3.2c-0.4,0.4-0.3,1.1,0.1,1.4c0.4,0.4,1.1,0.3,1.4-0.1 C16,13.9,17.9,13,20,13s4,0.9,5.4,2.5c0.2,0.2,0.5,0.4,0.8,0.4c0.2,0,0.5-0.1,0.6-0.2C27.2,15.3,27.2,14.6,26.9,14.2z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+
+
     </div>
 </body>
 </html>
+<script>
+
+
+    jQuery(function ($) {
+        $(window).on('scroll', function () {
+            if ($(this).scrollTop() >= 200) {
+                $('.navbar').addClass('fixed-top');
+            } else if ($(this).scrollTop() == 0) {
+                $('.navbar').removeClass('fixed-top');
+            }
+        });
+
+        function adjustNav() {
+            var winWidth = $(window).width(),
+                dropdown = $('.dropdown'),
+                dropdownMenu = $('.dropdown-menu');
+
+            if (winWidth >= 768) {
+                dropdown.on('mouseenter', function () {
+                    $(this).addClass('show')
+                        .children(dropdownMenu).addClass('show');
+                });
+
+                dropdown.on('mouseleave', function () {
+                    $(this).removeClass('show')
+                        .children(dropdownMenu).removeClass('show');
+                });
+            } else {
+                dropdown.off('mouseenter mouseleave');
+            }
+        }
+
+        $(window).on('resize', adjustNav);
+
+        adjustNav();
+    });
+</script>

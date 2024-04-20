@@ -53,6 +53,12 @@
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -130,12 +136,34 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\JobController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LocationController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SkillController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Navigation\NavigationModels.cs" />
     <Compile Include="Controllers\EmployerController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
+    <Compile Include="Controllers\MergerController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202404180837304_initial.cs" />
+    <Compile Include="Migrations\202404180837304_initial.designer.cs">
+      <DependentUpon>202404180837304_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404191639061_dat34.cs" />
+    <Compile Include="Migrations\202404191639061_dat34.designer.cs">
+      <DependentUpon>202404191639061_dat34.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404191707599_dat35.cs" />
+    <Compile Include="Migrations\202404191707599_dat35.designer.cs">
+      <DependentUpon>202404191707599_dat35.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Admins.cs" />
     <Compile Include="Models\Apply.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\Language.cs" />
@@ -167,14 +195,18 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
-    <Content Include="Content\Item\ChatBox.css" />
+    <Content Include="Content\Item\Applied.css" />
+    <Content Include="Content\Item\Detail.css" />
     <Content Include="Content\Item\FooterEmployer.css" />
     <Content Include="Content\Item\Index.css" />
+    <Content Include="Content\Item\InforCty.css" />
+    <Content Include="Content\Item\ListCompany.css" />
     <Content Include="Content\Item\Login.css" />
-    <Content Include="Content\Item\MessEmployer.css" />
+    <Content Include="Content\Item\ProfileCus.css" />
     <Content Include="Content\Item\NavBar.css" />
     <Content Include="Content\Item\PaymentEmployer.css" />
     <Content Include="Content\Item\ProfileEmployer.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -184,6 +216,28 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include=".editorconfig" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Navigation\Navigation.json" />
+    <Content Include="Areas\Admin\Views\Shared\LayoutAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\MenuPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Skill\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Skill\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Skill\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Location\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Location\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Location\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Job\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Job\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Job\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Job\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -196,13 +250,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper.min.js" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -224,17 +271,37 @@
     <Content Include="Views\Shared\NavBarDetail.cshtml" />
     <Content Include="Views\Shared\Contract.cshtml" />
     <Content Include="Views\HomePage\CustomerProfile.cshtml" />
-    <Content Include="Views\HomePage\ChatBox.cshtml" />
     <Content Include="Views\Employer\LayoutEmployer.cshtml" />
-    <Content Include="Views\Employer\FooterEmployer.cshtml" />
     <Content Include="Views\Employer\Index.cshtml" />
-    <Content Include="Views\Employer\MessEmployer.cshtml" />
     <Content Include="Views\Employer\ProfileEmployer.cshtml" />
     <Content Include="Views\Employer\PaymentEmployer.cshtml" />
     <Content Include="Views\Employer\Menu.cshtml" />
+    <Content Include="Views\Employer\FooterEmployer.cshtml" />
+    <Content Include="Views\Merger\InforCty.cshtml" />
+    <Content Include="Views\Merger\DetailCty.cshtml" />
+    <Content Include="Views\Shared\SkillPartial.cshtml" />
+    <Content Include="Views\Shared\CityPartial.cshtml" />
+    <Content Include="Views\Shared\LanguagePartial.cshtml" />
+    <Content Include="Views\Shared\ListCompany.cshtml" />
+    <Content Include="Views\Merger\Applied.cshtml" />
+    <Content Include="Web.Config" />
+    <Content Include="Views\Employer\JobIndex.cshtml" />
+    <Content Include="Views\Employer\Create.cshtml" />
+    <Content Include="Views\Employer\Details.cshtml" />
+    <Content Include="Views\Employer\Delete.cshtml" />
+    <Content Include="Views\Employer\Edit.cshtml" />
+    <Content Include="Views\Employer\Detail.cshtml" />
+    <Content Include="Views\Employer\AppliedView.cshtml" />
+    <None Include="Web.Debug.Config">
+      <DependentUpon>Web.Config</DependentUpon>
+    </None>
+    <None Include="Web.Release.Config">
+      <DependentUpon>Web.Config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -262,6 +329,17 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202404180837304_initial.resx">
+      <DependentUpon>202404180837304_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404191639061_dat34.resx">
+      <DependentUpon>202404191639061_dat34.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404191707599_dat35.resx">
+      <DependentUpon>202404191707599_dat35.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <script src="//cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/Scripts/js")
+    @Styles.Render("~/Content/Admin/css")
+    @Scripts.Render("~/Scripts/Admin/js")
+
+
+</head>
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Company name</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
+    <div class="navbar-nav">
+        <div class="nav-item text-nowrap">
+            <a class="nav-link px-3" href="#">Sign out</a>
+        </div>
+    </div>
+</header>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 col-lg-2 ">
+            @Html.Action("MenuPartial", "Home", new { Area = "Admin" })
+        </div>
+
+        </main>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Dashboard</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group me-2">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                        <span class="bi bi-calendar align-text-bottom"></span>
+                        This week
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header" style="color:blue">
+                            Rules
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li>Rule 1: Always adhere to company regulations and policies regarding information security and user privacy.</li>
+                                <li>Rule 2: Create and maintain regular backups of important data to ensure that no data is lost or corrupted in case of incidents.</li>
+                                <li>Rule 3: Implement cybersecurity measures such as regular software updates, use of strong passwords, and regular security system checks.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header" style="color:blue">
+                            Note
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li>Note 1: Double-check the accuracy of data before making any changes.</li>
+                                <li>Note 2: Always maintain proper documentation for any data modifications or deletions.</li>
+                                <li>Note 3: Inform relevant stakeholders about any significant changes to data to ensure transparency.</li>
+                                <!-- Add more notes as needed -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                @RenderBody()
+            </div>
+        </main>
+    </div>
+</div>
+
+</html>

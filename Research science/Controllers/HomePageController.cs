@@ -1,4 +1,5 @@
-﻿using Research_science.Models;
+﻿using PagedList;
+using Research_science.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace Research_science.Controllers
 {
@@ -69,6 +71,53 @@ namespace Research_science.Controllers
         {
             return PartialView();
         }
+        //
+        public ActionResult ListCompany(string skillName, string country, string searchString, int? page)
+        {
+            //
+            searchString = searchString ?? "";
+            var lstjob = db.Job.Where(s => s.JobName.Contains(searchString)).OrderBy(s => s.JobID).ToList();
+            
+         
+            IQueryable<Users> query = db.Users;
+            if (!string.IsNullOrEmpty(skillName))
+            {
+                query = query.Where(company => company.Business == skillName);
+            }
+            if (!string.IsNullOrEmpty(country))
+            {
+                query = query.Where(company => company.Address == country);
+            }
+            var listCom = query.ToList();
+            return View(listCom);
+        }
+
+
+
+
+
+
+
+        public ActionResult SkillPartial()
+        {
+            var listSkill = from cd in db.Skill select cd;
+            return PartialView(listSkill);
+        }
+
+        public ActionResult CityPartial()
+        {
+            var listCity = from cd in db.Location select cd;
+            return PartialView(listCity);
+        }
+
+
+        public ActionResult LanguagePartial()
+        {
+            var listLanguage = from cd in db.Language select cd;
+            return PartialView(listLanguage);
+        }
+
+
 
 
         public static string ConverImageToBase64(string path)
@@ -86,82 +135,59 @@ namespace Research_science.Controllers
             }
         }
 
-        //    [HttpGet]
-        //    public ActionResult CustomerProfile()
-        //    {
 
-        //        if (Session["UserName"] != null)
-        //        {
-        //            var customer = (Customer)Session["Customer"];
-        //            // Lấy thông tin hồ sơ từ cơ sở dữ liệu dựa trên ID
-        //            customer.MatKhauNL = customer.Password;
+        [HttpGet]
+        public ActionResult CustomerProfile()
+        {
+            if (Session["UserName"] != null)
+            {
+                var userName = Session["UserName"].ToString();
 
-        //            if (customer != null)
-        //            {
-        //                return View(customer);
-        //            }
-        //            else
-        //            {
-        //                return RedirectToAction("Error");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            return RedirectToAction("Error");
-        //        }
-        //    }
-        //    [HttpPost]
-        //    [ValidateInput(false)]
-        //    public ActionResult CustomerProfile(Customer model, HttpPostedFileBase myFile)
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
+                var user = db.Users.FirstOrDefault(u => u.UserName == userName);
 
+                if (user != null)
+                {
+                    return View(user);
+                }
+                else
+                {
+                    return RedirectToAction("Error");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+        }
 
-        //            if (myFile != null)
-        //            {
-        //                Image img = Image.FromStream(myFile.InputStream, true, true);
-        //                //model.Avatar = Utility.ConvertImageToBase64(img);
-        //            }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult CustomerProfile(Users model, HttpPostedFileBase myFile)
+        {
+            if (ModelState.IsValid)
+            {
+                if (myFile != null)
+                {
+                    Image img = Image.FromStream(myFile.InputStream, true, true);
+                    model.Image = Utility.ConvertImageToBase64(img);
+                }
 
-        //            db.Customer.AddOrUpdate(model);
-        //            db.SaveChanges();
-        //            Session["UserName"] = model;
-        //        }
+                db.Users.AddOrUpdate(model);
+                db.SaveChanges();
 
+                Session["UserName"] = model.UserName;
 
-        //        return View(model);
-        //    }
-        //    public ActionResult ChatBox(int employerId , int customerId)
-        //    {
-        //        // Lấy tin nhắn giữa customer và employer từ cơ sở dữ liệu
-        //        var messages = db.Message.Where(m => m.IDCustomer == customerId && m.IDEmployer == employerId).ToList();
+                return RedirectToAction("CustomerProfile"); // Sau khi cập nhật thành công, chuyển hướng lại đến trang CustomerProfile
+            }
 
-        //        // Truyền dữ liệu tin nhắn vào view
-        //        return View(messages);
-        //    }
+            return View(model);
+        }
 
-        //    // Phương thức để gửi tin nhắn từ customer
-        //    [HttpPost]
-        //    public ActionResult SendMessageFromCustomer(int employerId, string messageContent)
-        //    {
-        //        // Tạo một tin nhắn mới
-        //        var newMessage = new Message
-        //        {
-        //            IDEmployer = employerId,
-        //            Content = messageContent,
-        //            SendDate = DateTime.Now
-        //            // Thêm các trường dữ liệu khác nếu cần
-        //        };
-
-        //        // Lưu tin nhắn vào cơ sở dữ liệu
-        //        db.Message.Add(newMessage);
-        //        db.SaveChanges();
-
-        //        // Chuyển hướng lại đến trang ChatCustomer với dữ liệu đã được cập nhật
-        //        return RedirectToAction("ChatBox", new { employerId });
-        //    }
-        //}
+        public ActionResult Error()
+        {
+            // Xử lý trang lỗi ở đây
+            return View();
+        }
     }
 }
     

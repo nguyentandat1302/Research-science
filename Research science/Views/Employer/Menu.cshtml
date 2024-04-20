@@ -1,4 +1,4 @@
-﻿@model Research_science.Models.Employer
+﻿@model Research_science.Models.Users
 @{
     ViewBag.Title = "Menu";
     Layout = "~/Views/Employer/LayoutEmployer.cshtml";
@@ -31,13 +31,13 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-start">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
+                            <img src="@Model.LogoCompany" class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
                             <div class="w-100 ms-3">
-                                <h4 class="my-0">@Model.CompanyName</h4>
+                                <h4 class="my-0">@Model.FullName</h4>
                                 <p class="text-muted">@Model.UserName</p>
-                                <a href="@Url.Action("MessEmployer","Employer")" class="btn btn-success btn-xs waves-effect mb-2 waves-light">Job Company</a>
+                                <a href="@Url.Action("JobIndex","Employer")" class="btn btn-success btn-xs waves-effect mb-2 waves-light">Job Recruitment </a>
+                                <a href="@Url.Action("AppliedView","Employer")" class="btn btn-success btn-xs waves-effect mb-2 waves-light">Apply Management </a>
                                 <a href="@Url.Action("ProfileEmployer","Employer")" class="btn btn-success btn-xs waves-effect mb-2 waves-light">Profile</a>
-                                <a href="@Url.Action("MessEmployer","Employer")" class="btn btn-success btn-xs waves-effect mb-2 waves-light">Message</a>
                                 <a href="@Url.Action("PaymentEmployer","Employer")" class="btn btn-success btn-xs waves-effect mb-2 waves-light">Payment</a>
 
 
@@ -48,7 +48,7 @@
                         <div class="mt-3">
                             <h4 class="font-13 text-uppercase">About Me :</h4>
                             <p class="text-muted font-13 mb-3">
-                               @Model.Description
+                               @Model.Decsription
                             </p>
 
                             <p class="text-muted mb-2 font-13"><strong>Mobile :</strong><span class="ms-2">@Model.Phone</span></p>
@@ -466,7 +466,10 @@
 
             </div> <!-- end col -->
         </div>
-        }
+        
 
 </div>
+<div class="row bottom" style="margin-bottom:0px">
+    @Html.Action("FooterEmployer", "Employer")
 
+</div>

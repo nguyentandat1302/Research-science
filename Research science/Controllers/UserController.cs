@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static System.Net.WebRequestMethods;
 
 namespace Research_science.Controllers
 {
@@ -23,88 +24,124 @@ namespace Research_science.Controllers
         {
             return View();
         }
+        // Company 
         [HttpPost]
-        public ActionResult SignUp(Users Model)
+        public ActionResult SignUp(Users model, HttpPostedFileBase logoFile)
         {
             if (ModelState.IsValid)
             {
-                var kh = db.Users.FirstOrDefault(k => k.UserName == Model.UserName);
-                if (kh != null)
+                // Kiểm tra xem tên người dùng đã tồn tại chưa
+                var existingUser = db.Users.FirstOrDefault(u => u.UserName == model.UserName);
+                if (existingUser != null)
                 {
-                    ModelState.AddModelError("UserName", "This account has already existed");
-                    return View(Model);
+                    ModelState.AddModelError("UserName", "This username is already taken");
+                    return View(model);
                 }
 
-                db.Users.Add(Model);
+                if (logoFile != null && logoFile.ContentLength > 0)
+                {
+                    if (logoFile.ContentType != "image/jpeg" && logoFile.ContentType != "image/png")
+                    {
+                        ModelState.AddModelError("LogoCompany", "Only JPG and PNG formats are supported for logo");
+                        return View(model);
+                    }
+
+                    // Kiểm tra kích thước tập tin (giả sử tối đa là 5MB)
+                    if (logoFile.ContentLength > 5 * 1024 * 1024)
+                    {
+                        ModelState.AddModelError("LogoCompany", "Logo file size cannot exceed 5MB");
+                        return View(model);
+                    }
+
+                    model.LogoCompany = Utility.ConvertImageToBase64(Image.FromStream(logoFile.InputStream, true, true));
+                }
+                model.MaLoaiUser = 1;
+                db.Users.Add(model);
                 db.SaveChanges();
 
-             
                 return RedirectToAction("Login", "User");
             }
 
-            return View(Model);
+            return View(model);
         }
+
+
+        //Freelancer
         [HttpGet]
         public ActionResult Register()
         {
             return View();
         }
+
         [HttpPost]
-        public ActionResult Register(Users Model)
+        public ActionResult Register(Users model)
         {
             if (ModelState.IsValid)
             {
-                var kh = db.Users.FirstOrDefault(k => k.UserName == Model.UserName);
-                if (kh != null)
+                // Kiểm tra xem có người dùng nào đã sử dụng email này chưa
+                var existingUser = db.Users.FirstOrDefault(u => u.UserName == model.UserName);
+                if (existingUser != null)
                 {
-                    ModelState.AddModelError("UserName", "This account has already existed");
-                    return View(Model);
+                    ModelState.AddModelError("UserName", "This email address is already registered");
+                    return View(model); // Trả về view với thông báo lỗi
                 }
 
-                db.Users.Add(Model);
+                // Chú ý: Ngày tháng đã được lưu trong thuộc tính BirthDay của model Users
+                model.MaLoaiUser = 2;
+                db.Users.Add(model);
                 db.SaveChanges();
 
                 return RedirectToAction("Login", "User");
             }
 
-            return View(Model);
+            return View(model);
         }
+
+
+
 
         [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(UserLogin user)
         {
             if (ModelState.IsValid)
             {
-                var customer = db.Users.FirstOrDefault(k => k.UserName == user.UserName && k.Password == user.Password);
-                var employer = db.Users.FirstOrDefault(k => k.UserName == user.UserName && k.Password == user.Password);
+                var customer = db.Users.FirstOrDefault(k => (k.UserName == user.UserName) && k.Password == user.Password);
 
-                //if (customer != null)
-                //{
-                //    // Đăng nhập là khách hàng
-                //    Session["IDCustomer"] = customer.IDCustomer;
-                //    Session["UserName"] = customer.UserName;
-                //    Session["Customer"] = customer;
-                //    return RedirectToAction("Index", "HomePage");
-                //}
-                //else if (employer != null)
-                //{
-                //    // Đăng nhập là nhà tuyển dụng
-                //    Session["Employer"] = employer;
-                //    return RedirectToAction("Menu", "Employer", new { Area = "Employer" });
-                //}
-                //else
-                //{
-                //    ModelState.AddModelError("Password", "Tài khoản không tồn tại hoặc mật khẩu không đúng.");
-                //}
+                if (customer != null)
+                {
+                    if (customer.MaLoaiUser == 1)
+                    {
+                        //Em dau co tao Area Employer dau, khi tao earea ma moi kb nhe
+                        Session["UserName"] = customer;
+                        return RedirectToAction("Menu", "Employer"); // Chỉ định khu vực là "Employer"
+                    }
+                    else if (customer.MaLoaiUser == 2)
+                    {
+                        Session["UserName"] = customer;
+                        return RedirectToAction("Index", "HomePage");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Tài khoản không tồn tại hoặc mật khẩu không đúng.");
+                }
             }
 
-            return View();
+            return View(user);
         }
+
+
+
+
+
+
 
 
 

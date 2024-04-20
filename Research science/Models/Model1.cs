@@ -8,10 +8,11 @@ namespace Research_science.Models
     public partial class Model1 : DbContext
     {
         public Model1()
-            : base("name=Model1")
+            : base("name=Model11")
         {
         }
 
+        public virtual DbSet<Admins> Admins { get; set; }
         public virtual DbSet<Apply> Apply { get; set; }
         public virtual DbSet<Job> Job { get; set; }
         public virtual DbSet<Language> Language { get; set; }
@@ -69,21 +70,10 @@ namespace Research_science.Models
                 .Property(e => e.TenLoai)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Location>()
-                .Property(e => e.Country)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Skill>()
-                .Property(e => e.SkillName)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Users>()
-                .Property(e => e.LogoCompany)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Users>()
-                .Property(e => e.Image)
-                .IsUnicode(false);
+            modelBuilder.Entity<LoaiUser>()
+                .HasMany(e => e.Users)
+                .WithOptional(e => e.LoaiUser)
+                .HasForeignKey(e => e.MaLoaiUser);
 
             modelBuilder.Entity<Users>()
                 .Property(e => e.UserName)

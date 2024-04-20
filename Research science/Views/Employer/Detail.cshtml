@@ -1,0 +1,82 @@
+﻿@model Research_science.Models.Apply
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Employer/LayoutEmployer.cshtml";
+}
+
+<h2>Thông Tin Chi Tiết Về CV Của Các Ứng Cử Viên</h2>
+
+<div>
+    <h4>Dưới Đây Là Thông Tin Của Họ</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Job.JobName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Job.JobName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Users.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Users.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CV)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Coverletter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Coverletter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeAppointment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeAppointment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Accept)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Accept)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

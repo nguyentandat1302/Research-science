@@ -1,0 +1,19 @@
+﻿<ul class="list-group">
+    @foreach (var item in Model)
+    {
+        <li class="dropdown-item" data-skill-id="@item.SkillID" data-skill-name="@item.SkillName">
+            <a href="@Url.Action("ListCompany", "HomePage", new { skillName = item.SkillName })" class="list-group-item">@item.SkillName</a>
+        </li>
+    }
+</ul>
+
+
+<script>
+    $(document).ready(function () {
+        $('.dropdown-item').click(function () {
+            var skillID = $(this).data('skill-id');
+            var skillName = $(this).data('skill-name');
+            window.location.href = '/HomePage/ListCompany?skillID=' + skillID + '&skillName=' + skillName;
+        });
+    });
+</script>

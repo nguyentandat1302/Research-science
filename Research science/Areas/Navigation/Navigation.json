@@ -1,0 +1,55 @@
+{
+  "MenuItems": [
+    {
+      "DisplayName": "Dashboard",
+      "Icon": "bi-columns",
+      "Link": "/Admin/Home/Index",
+      "IsNested": false,
+      "Sequence": 1,
+      "UserRoles": [ "admin" ],
+      "NestedItems": []
+    },
+
+    {
+      "DisplayName": "Quản Lý User",
+      "Icon": "bi-people",
+      "Link": "/Admin/Users/Index",
+      "IsNested": false,
+      "Sequence": 2,
+      "UserRoles": [ "admin" ],
+      "NestedItems": []
+    },
+
+    {
+      "DisplayName": "Quản Lý Skills",
+      "Icon": "bi bi-award-fill",
+      "Link": "/Admin/Skill/Index",
+      "IsNested": false,
+      "Sequence": 2,
+      "UserRoles": [ "admin" ],
+      "NestedItems": []
+    },
+
+    {
+      "DisplayName": "Quản Lý Job",
+      "Icon": "bi bi-suitcase-lg-fill",
+      "Link": "/Admin/Job/Index",
+      "IsNested": false,
+      "Sequence": 3,
+      "UserRoles": [ "admin" ],
+      "NestedItems": []
+    },
+
+    {
+      "DisplayName": "Quản Lý Location",
+      "Icon": "bi bi-geo-alt-fill",
+      "Link": "/Admin/Location/Index",
+      "IsNested": false,
+      "Sequence": 4,
+      "UserRoles": [ "admin" ],
+      "NestedItems": []
+    },
+
+  
+  ]
+}

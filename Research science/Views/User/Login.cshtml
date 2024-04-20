@@ -1,4 +1,5 @@
-﻿@model Research_science.Models.UserLogin
+﻿
+@model Research_science.Models.UserLogin
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/LayoutNavbar.cshtml";
@@ -6,10 +7,11 @@
 
 <link href="~/Content/Item/Login.css" rel="stylesheet">
 
-@using (Html.BeginForm())
-{
-    <form action="/User/Login" method="post">
 
+@using (Html.BeginForm("Login", "User", FormMethod.Post))
+{
+    @Html.AntiForgeryToken( )
+    <form action="/User/Login" method="post">
         <div class="wrapper">
             @Html.ValidationSummary(true)
             <div class="logo">
@@ -18,19 +20,21 @@
             <div class="text-center mt-4 name">
                 TD-Freelancer and Develoyment
             </div>
-            <form class="p-3 mt-3">
+            <div class="p-3 mt-3">
                 <label for="exampleFormControlInput2" class="form-label">UserName</label>
                 @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
                 <label for="inputPassword5" class="form-label">Password</label>
                 @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
                 <button class="btn mt-3">Login</button>
-            </form>
+            </div>
             <div class="text-center fs-6">
                 <a href="@Url.Action("ForgotPass", "User")">Forget password?</a> or <a href="@Url.Action("Register","User")">Sign up</a>
             </div>
         </div>
-        </form>
-        
-} 
+    </form>
+
+
+}

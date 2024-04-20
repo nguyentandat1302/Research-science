@@ -1,0 +1,127 @@
+﻿@model IEnumerable<Research_science.Models.Users>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<h2>Tất Cả Thông Tin Của Công Ty Và Tất Cả Ứng Cử Viên</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LoaiUser.TenLoai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LogoCompany)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Decsription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CDCD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BirthDay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Wallet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Business)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CanCuoc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Accpet)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoaiUser.TenLoai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullName)
+        </td>
+        <td>
+            <img src="@item.LogoCompany" style="width:50px;" />
+
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Decsription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CDCD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthDay)
+        </td>
+        <td>
+            <img src="@item.Image" style="width:50px;" />
+
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Wallet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Business)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CanCuoc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Accpet)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.UserID }, new { @class = "btn btn-warning" }) |
+            @Html.ActionLink("Details", "Details", new { id = item.UserID }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.UserID }, new { @class = "btn btn-danger" })
+        </td>
+
+    </tr>
+}
+
+</table>

@@ -9,7 +9,6 @@ namespace Research_science.Models
     [Table("Apply")]
     public partial class Apply
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ApplyID { get; set; }
 
         public int? UserID { get; set; }
@@ -30,6 +29,8 @@ namespace Research_science.Models
 
         [StringLength(255)]
         public string Address { get; set; }
+
+        public bool Accept { get; set; }
 
         public virtual Job Job { get; set; }
 

@@ -15,7 +15,6 @@ namespace Research_science.Models
             Job = new HashSet<Job>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SkillID { get; set; }
 
         [StringLength(100)]

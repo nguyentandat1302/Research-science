@@ -16,13 +16,11 @@ namespace Research_science.Models
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int UserID { get; set; }
 
         [StringLength(100)]
         public string FullName { get; set; }
 
-        [StringLength(255)]
         public string LogoCompany { get; set; }
 
         public int? Phone { get; set; }
@@ -39,13 +37,12 @@ namespace Research_science.Models
         [Column(TypeName = "date")]
         public DateTime? BirthDay { get; set; }
 
-        [StringLength(255)]
         public string Image { get; set; }
 
         [StringLength(100)]
         public string UserName { get; set; }
 
-        [StringLength(100)]
+        [StringLength(255)]
         public string Password { get; set; }
 
         [StringLength(100)]
@@ -54,10 +51,25 @@ namespace Research_science.Models
         [StringLength(300)]
         public string Wallet { get; set; }
 
+        [StringLength(100)]
+        public string Business { get; set; }
+
+        public int? CanCuoc { get; set; }
+
+
+        [NotMapped]
+        //[Compare("Password")]
+        public string ConfirmPass { get; set; }
+        public bool Accpet { get; set; }
+
+        public int? MaLoaiUser { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Apply> Apply { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Job> Job { get; set; }
+
+        public virtual LoaiUser LoaiUser { get; set; }
     }
 }

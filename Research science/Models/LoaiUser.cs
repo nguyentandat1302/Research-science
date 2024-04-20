@@ -9,11 +9,19 @@ namespace Research_science.Models
     [Table("LoaiUser")]
     public partial class LoaiUser
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public LoaiUser()
+        {
+            Users = new HashSet<Users>();
+        }
+
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int MaLoai { get; set; }
 
         [StringLength(100)]
         public string TenLoai { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Users> Users { get; set; }
     }
 }

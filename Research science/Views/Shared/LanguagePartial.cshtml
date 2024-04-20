@@ -1,0 +1,23 @@
+﻿
+
+<ul class="list-group">
+
+    @foreach (var item in Model)
+    {
+        <a href="@Url.Action("CityPartial","HomePage", new { id = item.IDLanguage})"
+
+                <a href="#" class="list-group-item">@item.NameLanguage</a>
+
+      }
+    </ul>
+
+
+    <script>
+    $(document).ready(function () {
+        $('.dropdown-item').click(function () {
+            var skillID = $(this).data('skill-id');
+            var skillName = $(this).data('skill-name');
+            window.location.href = '/HomePage/ListCompany?skillID=' + skillID + '&skillName=' + skillName;
+        });
+    });
+    </script>

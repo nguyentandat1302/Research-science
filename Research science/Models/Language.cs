@@ -16,7 +16,6 @@ namespace Research_science.Models
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IDLanguage { get; set; }
 
         [StringLength(100)]

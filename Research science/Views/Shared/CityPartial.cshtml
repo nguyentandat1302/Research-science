@@ -1,0 +1,18 @@
+﻿<ul class="list-group">
+    @foreach (var item in Model)
+    {
+        <li class="dropdown-item" data-id-location="@item.IdLocation" data-country="@item.Country">
+            <a href="@Url.Action("ListCompany", "HomePage", new { country = item.Country })" class="list-group-item">@item.Country</a>
+        </li>
+    }
+</ul>
+
+<script>
+    $(document).ready(function () {
+        $('.dropdown-item').click(function () {
+            var IdLocation = $(this).data('id-location');
+            var Country = $(this).data('country');
+            window.location.href = '/HomePage/ListCompany?IdLocation=' + IdLocation + '&Country=' + Country;
+        });
+    });
+</script>

@@ -1,0 +1,81 @@
+﻿@using Research_science.Models
+
+@model  Research_science.Areas.Navigation.NavigationMenu
+@{
+    dynamic user = (Admins)Session["Admin"];
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS here */
+        .sidebar {
+            margin-top: 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            z-index: 1000;
+            background-color: #fff;
+            border-right: 1px solid #e5e5e5;
+        }
+
+        .sidebar-sticky {
+            padding-top: 20px;
+        }
+
+        .sidebar .nav-link {
+            font-weight: 500;
+            color: #333;
+        }
+
+            .sidebar .nav-link:hover {
+                color: #0056b3;
+            }
+
+        .sidebar .active {
+            color: #0056b3;
+            font-weight: 600;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav id="sidebarMenu" class="sidebar">
+        <div class="position-sticky pt-3 sidebar-sticky">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link fs-5" aria-current="page">
+                        <i class="fas fa-user-circle me-2"></i>Welcome, @user.UserName
+                    </a>
+                </li>
+                @foreach (var item in Model.MenuItems)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link @((Request.Path == item.Link) ? "active" : "")" href="@item.Link">
+                            <i class="@item.Icon me-2"></i>
+                         <span>@item.DisplayName</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

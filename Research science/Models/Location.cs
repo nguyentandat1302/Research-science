@@ -16,10 +16,9 @@ namespace Research_science.Models
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IdLocation { get; set; }
 
-        [StringLength(100)]
+        [StringLength(50)]
         public string Country { get; set; }
 
         public int? Latitude { get; set; }

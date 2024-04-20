@@ -1,0 +1,43 @@
+﻿@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "ListCompany";
+    Layout = "~/Views/Shared/LayoutNavbar.cshtml";
+}
+
+<link rel='stylesheet' href='https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+<script src='https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="container bootstrap snippets bootdey">
+    @foreach (var company in Model)
+    {  
+        <div class="row">
+            <div class="post-list">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="picture">
+                            <img alt="" src="@company.LogoCompany" style="max-width: 100%; max-height: 100%;">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>
+                            <a href="#" class="username">@company.FullName</a>
+                            <label class="label label-info">@company.Business</label>
+                        </h4>
+                        <h5>@company.Address</h5>
+                        <p class="labe">@company.Decsription</p>
+                    </div>
+                    <div class="col-sm-4" data-no-turbolink="">
+                        <a class="btn btn-info btn-download btn-round pull-right makeLoading" href="@Url.Action("DetailCty", "Merger",new { Id = company.UserID })">
+                            <i class="fa fa-share"></i> Continue
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
