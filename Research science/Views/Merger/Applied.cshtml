@@ -24,7 +24,7 @@
                                     <th scope="col">Job title</th>
                                     <th scope="col">Company</th>
                                     <th scope="col">Location</th>
-                                    <th scope="col">Latest status</th>
+                                    <th scope="col">Payment</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -33,20 +33,20 @@
                                 {
                                     <tr>
                                         <td>@job.JobID</td>
-                                        <td>@job.Title</td> <!-- Thay @job.Skill bằng @job.Title để hiển thị tiêu đề công việc -->
-                                        <td>@job.Users.FullName</td> <!-- Hiển thị tên của công ty -->
+                                        <td>@job.Title</td> 
+                                        <td>@job.JobName</td> 
                                         <td>
-                                            <span class="text-success font-12"><i class="mdi mdi-checkbox-blank-circle mr-1"></i>@job.Location.Country</span> <!-- Thay @job.Location bằng @job.Location.Country để hiển thị tên địa điểm -->
+                                            <span class="text-success font-12"><i class="mdi mdi-checkbox-blank-circle mr-1"></i>@job.Location.Country</span> 
                                         </td>
                                         <td>
-                                            <p class="mb-0">@job.Users.UserName<span class="float-right">Applied</span></p> <!-- Thay @job.Users bằng @job.Users.UserName để hiển thị tên người ứng tuyển -->
+                                            <p class="mb-0">@job.Budget<span class="float-right"></span></p> 
                                             <div class="progress mt-2" style="height: 5px;">
                                                 <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="action">
-                                                <a href="#" class="text-success mr-4" data-toggle="tooltip" data-placement="top" title="Edit"> <i class="fa fa-pencil h5 m-0"></i></a>
+                                                <a href="#" class="text-success mr-4" data-toggle="tooltip" data-placement="top" title="Edit"> <i class="fa fa-pencil h5 m-0">@job.Accept</i></a>
                                                 <a href="#" class="text-danger" data-toggle="tooltip" data-placement="top" title="Close"> <i class="fa fa-remove h5 m-0"></i></a>
                                             </div>
                                         </td>
@@ -62,9 +62,7 @@
 </div>
 
     <script>
-        // Xử lý sự kiện khi nhấn vào nút "Create CV to Apply"
         document.getElementById("createCVBtn").addEventListener("click", function() {
-            // Gửi yêu cầu đến action Applied của controller Job
             window.location.href = '@Url.Action("Applied", "Job")';
         });
     </script>

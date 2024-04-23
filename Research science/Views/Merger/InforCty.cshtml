@@ -1,211 +1,51 @@
-﻿
+﻿@model PagedList.IPagedList<Research_science.Models.Job>
+@using PagedList.Mvc
+@using Research_science.Models
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/Site.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+@Styles.Render("~/Content/css")
 
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css'>
-
-<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js'></script>
-
-<link href="~/Content/Item/InforCty.css" rel="stylesheet">
 
 
+<style>
+    .job-heading {
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
 
+<h1 class="job-heading">Những Công Việc Đang Trên Xu Hướng</h1>
 
-<div class="container">
-
-    <div class="py-6">
-        <div class="row">
-            <div class="col-lg-4 col-12">
-                <!-- card -->
-                <div class="card mb-5 rounded-3">
-                   
-                    <!-- avatar -->
-                    <div class="avatar avatar-xl mt-n7 ms-4">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Image" class="rounded-circle border-4
-                     border-white-color-40">
-                    </div>
-                    <!-- card body -->
-                    <div class="card-body">
-                        <!-- Title -->
-                        <h4 class="mb-1">Karina Clark</h4>
-                        <p>UX Desginer</p>
-                        <div>
-                            <!-- Dropdown -->
-                            <div class="d-flex justify-content-between
-                           align-items-center">
-                                <a href="@Url.Action("DetailCty", "Merger")" class="btn btn-outline-primary">Follow</a>
-                                <div class="dropdown dropstart">
-                                    <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle" id="dropdownMenuOne" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical icon-xs"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOne">
-                                        <a class="dropdown-item d-flex align-items-center" href="#!"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text me-2 icon-xxs dropdown-item-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Report</a>
-                                        <a class="dropdown-item d-flex align-items-center" href="#!"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-slash me-2 icon-xxs dropdown-item-icon"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>Block</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+@foreach (var job in Model)
+{
+    <div class="col-lg-4 col-12">
+        <div class="card mb-5 rounded-3">
+            <div class="avatar avatar-xl mt-n7 ms-4">
+                <img src="@job.Anh" alt="Image" class="rounded-circle border-4 border-white-color-40" style="width: 100px; height: 100px;">
             </div>
-            <div class="col-lg-4 col-12">
-                <!-- card -->
-                <div class="card mb-5 rounded-3">
-                    
-                    <!-- avatar -->
-                    <div class="avatar avatar-xl mt-n7 ms-4">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="Image" class="rounded-circle border-4
-              border-white-color-40">
-                    </div>
-                    <!-- card body -->
-                    <div class="card-body">
-                        <!-- Title -->
-                        <h4 class="mb-1">Dianna Smiley</h4>
-                        <p>Full Stack Developer</p>
-                        <div>
-                            <!-- Dropdown -->
-                            <div class="d-flex justify-content-between
-                align-items-center">
-                                <a href="@Url.Action("DetailCty", "Merger")" class="btn btn-outline-primary">Follow</a>
-                                <div class="dropdown dropstart">
-                                    <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle" id="dropdownMenuTwo" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical icon-xs"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuTwo">
-                                        <a class="dropdown-item d-flex align-items-center" href="#!"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text me-2 icon-xxs dropdown-item-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Report</a>
-                                        <a class="dropdown-item d-flex align-items-center" href="#!"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-slash me-2 icon-xxs dropdown-item-icon"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>Block</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-12">
-                <!-- card -->
-                <div class="card mb-5 rounded-3">
-                   
-                    <!-- avatar -->
-                    <div class="avatar avatar-xl mt-n7 ms-4">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="Image" class="rounded-circle border-4
-              border-white-color-40">
-                    </div>
-                    <!-- card body -->
-                    <div class="card-body">
-                        <!-- Title -->
-                        <h4 class="mb-1">Anne Brewer</h4>
-                        <p>Content Marketing Managers</p>
-                        <div>
-                            <!-- Dropdown -->
-                            <div class="d-flex justify-content-between
-                align-items-center">
-                                <a href="@Url.Action("DetailCty", "Employer")" class="btn btn-outline-primary">Follow</a>
-                                <div class="dropdown dropstart">
-                                    <a href="#!" id="dropdownMenuThree" class="btn btn-ghost btn-icon btn-sm rounded-circle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical icon-xs"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuThree">
-                                        <a class="dropdown-item d-flex align-items-center" href="#!"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text me-2 icon-xxs dropdown-item-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Report</a>
-                                        <a class="dropdown-item d-flex align-items-center" href="#!"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-slash me-2 icon-xxs dropdown-item-icon"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>Block</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-12">
-                <!-- card -->
-                <div class="card mb-5 rounded-3">
-                   
-                    <!-- avatar -->
-                    <div class="avatar avatar-xl mt-n7 ms-4">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="Image" class="rounded-circle border-4
-              border-white-color-40">
-                    </div>
-                    <!-- card body -->
-                    <div class="card-body">
-                        <!-- Title -->
-                        <h4 class="mb-1">Diane Baughman</h4>
-                        <p>Senior UX Designer</p>
-                        <div>
-                            <!-- Dropdown -->
-                            <div class="d-flex justify-content-between
-                align-items-center">
-                                <a href="#!" class="btn btn-outline-primary">Follow</a>
-                                <div class="dropdown dropstart">
-                                    <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle" id="dropdownMenuFour" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical icon-xs"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuFour">
-                                        <a class="dropdown-item d-flex align-items-center" href="#!"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text me-2 icon-xxs dropdown-item-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Report</a>
-                                        <a class="dropdown-item d-flex align-items-center" href="#!"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-slash me-2 icon-xxs dropdown-item-icon"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>Block</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-12">
-                <!-- card -->
-                <div class="card mb-5 rounded-3">
-                   
-                    <!-- avatar -->
-                    <div class="avatar avatar-xl mt-n7 ms-4">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="Image" class="rounded-circle border-4
-              border-white-color-40">
-                    </div>
-                    <!-- card body -->
-                    <div class="card-body">
-                        <!-- Title -->
-                        <h4 class="mb-1">Roland Thomas</h4>
-                        <p>Front-End Enginee</p>
-                        <div>
-                            <!-- Dropdown -->
-                            <div class="d-flex justify-content-between
-                align-items-center">
-                                <a href="#!" class="btn btn-outline-secondary">Following</a>
-                                <div class="dropdown dropstart">
-                                    <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle" id="dropdownMenuFive" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical icon-xs"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuFive">
-                                        <a class="dropdown-item d-flex align-items-center" href="#!"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text me-2 icon-xxs dropdown-item-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Report</a>
-                                        <a class="dropdown-item d-flex align-items-center" href="#!"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-slash me-2 icon-xxs dropdown-item-icon"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>Block</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-12">
-                <!-- card -->
-                <div class="card mb-5 rounded-3">
-                    
-                    <!-- avatar -->
-                    <div class="avatar avatar-xl mt-n7 ms-4">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="Image" class="rounded-circle border-4
-              border-white-color-40">
-                    </div>
-                    <!-- card body -->
-                    <div class="card-body">
-                        <!-- Title -->
-                        <h4 class="mb-1">Joshua George</h4>
-                        <p>UX Desginer</p>
-                        <div>
-                            <!-- Dropdown -->
-                            <div class="d-flex justify-content-between
-                align-items-center">
-                                <a href="#!" class="btn btn-outline-primary">Follow</a>
-                                <div class="dropdown dropstart">
-                                    <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle" id="dropdownMenuSix" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical icon-xs"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuSix">
-                                        <a class="dropdown-item d-flex align-items-center" href="#!"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text me-2 icon-xxs dropdown-item-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Report</a>
-                                        <a class="dropdown-item d-flex align-items-center" href="#!"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-slash me-2 icon-xxs dropdown-item-icon"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>Block</a>
-                                    </div>
-                                </div>
+            <div class="card-body">
+                <h4 class="mb-1">@job.JobName</h4>
+                <p>@job.Title</p>
+                <p>@job.Description</p>
+                <div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="@Url.Action("JobCty", "Merger")" class="btn btn-outline-primary">Apply ow and Detial</a>
+                        <div class="dropdown dropstart">
+                            <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle" id="dropdownMenuOne" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical icon-xs"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuOne">
+                                <a class="dropdown-item d-flex align-items-center" href="#!"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text me-2 icon-xxs dropdown-item-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Report</a>
+                                <a class="dropdown-item d-flex align-items-center" href="#!"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-slash me-2 icon-xxs dropdown-item-icon"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>Block</a>
                             </div>
                         </div>
                     </div>
@@ -213,4 +53,25 @@
             </div>
         </div>
     </div>
+}
+<div class="row">
+    <div class="col-md-12 text-center">
+        <p>
+            Page @(Model.PageNumber < Model.PageCount ? Model.PageNumber : Model.PageCount) of @Model.PageCount
+        </p>
+
+        <div style="display: inline-block;">
+            @Html.PagedListPager(Model,
+                page => Url.Action("InforCty", new { page = page }),
+                PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+                    new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "your-partial-view-container-id" }
+                )
+            )
+        </div>
+    </div>
 </div>
+
+
+
+
+

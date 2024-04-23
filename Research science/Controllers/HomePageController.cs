@@ -136,18 +136,18 @@ namespace Research_science.Controllers
         }
 
 
+
         [HttpGet]
         public ActionResult CustomerProfile()
         {
             if (Session["UserName"] != null)
             {
-                var userName = Session["UserName"].ToString();
+                var customer = (Users)Session["UserName"];
+                customer.ConfirmPass = customer.Password;
 
-                var user = db.Users.FirstOrDefault(u => u.UserName == userName);
-
-                if (user != null)
+                if (customer != null)
                 {
-                    return View(user);
+                    return View(customer);
                 }
                 else
                 {
@@ -159,7 +159,6 @@ namespace Research_science.Controllers
                 return RedirectToAction("Error");
             }
         }
-
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult CustomerProfile(Users model, HttpPostedFileBase myFile)
@@ -171,21 +170,24 @@ namespace Research_science.Controllers
                     Image img = Image.FromStream(myFile.InputStream, true, true);
                     model.Image = Utility.ConvertImageToBase64(img);
                 }
+                model.MaLoaiUser = 2;
 
                 db.Users.AddOrUpdate(model);
                 db.SaveChanges();
 
-                Session["UserName"] = model.UserName;
+                Session["UserName"] = model;
 
-                return RedirectToAction("CustomerProfile"); // Sau khi cập nhật thành công, chuyển hướng lại đến trang CustomerProfile
+                return RedirectToAction("CustomerProfile");
             }
 
             return View(model);
         }
 
+
+
+
         public ActionResult Error()
         {
-            // Xử lý trang lỗi ở đây
             return View();
         }
     }

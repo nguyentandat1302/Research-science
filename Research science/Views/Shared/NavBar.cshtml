@@ -45,7 +45,6 @@
                 @if (Session["UserName"] != null)
                 {
                     var customer = (Research_science.Models.Users)Session["Freelancer"];
-                    //lúc nảy em có cài trong cái nút là  khi nhần vào mà chưa đăng nhập thì nó trả về trang chủ , mà sao em đăng nhập rồi nó vẫn trả về ạ
 
                     <div style="float: right" class="dropdown">
                         @if (customer != null && customer.Image != null)
@@ -114,7 +113,7 @@
 
 
 
-        <form class="navbar-form navbar-left" action="/HomePage/ListCompany" method="get">
+        <form class="navbar-form navbar-left" action="/Merger/InforCty" method="get">
             <div class="row" style="padding-top:150px; position: relative;">
                 <p style="font-size:70px;color:azure;font-weight:700">
                     Find your job

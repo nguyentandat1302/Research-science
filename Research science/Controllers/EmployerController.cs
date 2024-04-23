@@ -1,15 +1,17 @@
 ﻿using Research_science.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Migrations;
-using System.Drawing;
 using System.Linq;
-using System.Net.Mail;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using PagedList.Mvc;
 using System.IO;
+using System.Data.Entity.Migrations;
+using System.Drawing;
+using System.Net.Mail;
+using System.Net;
+
 
 namespace Research_science.Controllers
 {
@@ -23,11 +25,18 @@ namespace Research_science.Controllers
 
         public ActionResult JobIndex(int? page)
         {
-            int iPageNum = (page ?? 1);
-            int iPageSize = 7;
-            return View(db.Job.ToList().OrderBy(n => n.JobID).ToPagedList(iPageNum, iPageSize));
-        }
+            int iPageNum = page ?? 1;
+            int iPageSize = 4;
 
+            var jobs = db.Job.OrderBy(n => n.JobID).Skip((iPageNum - 1) * iPageSize).Take(iPageSize).ToList();
+
+            ViewBag.HasPreviousPage = iPageNum > 1;
+            ViewBag.HasNextPage = jobs.Count() == iPageSize;
+            ViewBag.TotalPages = (int)Math.Ceiling((double)db.Job.Count() / iPageSize);
+            ViewBag.PageNumber = iPageNum;
+
+            return View(jobs);
+        }
         [HttpGet]
         public ActionResult Create()
         {
@@ -178,7 +187,6 @@ namespace Research_science.Controllers
             }
         }
 
-        //Acction de dang ky tai khoan do e
 
         [HttpPost]
         [ValidateInput(false)]
@@ -207,7 +215,7 @@ namespace Research_science.Controllers
             if (Session["UserName"] != null)
             {
                 var employer = (Users)Session["UserName"];
-                //employer.ConfirmPass = employer.Password;
+                employer.ConfirmPass = employer.Password;
 
                 if (employer != null)
                 {
@@ -251,59 +259,70 @@ namespace Research_science.Controllers
 
 
 
-        //Gio sua search hay sao em
-
-        // cho em hỏi là cái view đỡ chấp nhận cv của  emloyee á thầy là tự tạo hay tạo theo cách lúc tạo admin ạ
+       
         public ActionResult PaymentEmployer()
         {
             return PartialView();
         }
 
-        //////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
         public ActionResult Accept(int id)
         {
-            var job = db.Job.FirstOrDefault(n => n.JobID == id);
+            var apply = db.Apply.FirstOrDefault(n => n.JobID == id);
 
-            if (job != null)
+            if (apply != null)
             {
-                job.Accept = true;
+                apply.Accept = true;
                 db.SaveChanges();
 
-                return RedirectToAction("Menu", "Employer"); // Chuyển hướng người dùng đến action "Menu" trong controller "Employer"
+                SendApplicationStatusEmail(apply.Users.Email, true); // Gửi email với tình trạng đã chấp nhận
             }
             else
             {
                 ViewBag.Error = "Error";
-                return RedirectToAction("Index", "Home"); // Trong trường hợp không tìm thấy công việc, chuyển hướng người dùng đến trang chủ
             }
+
+            return RedirectToAction("AppliedView");
         }
-
-
 
         public ActionResult Refuse(int id)
         {
-            var job = db.Job.FirstOrDefault(n => n.JobID == id);
+            var apply = db.Apply.FirstOrDefault(n => n.JobID == id);
 
-            if (job != null)
+            if (apply != null)
             {
-                job.Accept = false;
+                apply.Accept = false;
                 db.SaveChanges();
 
-                SendBookingConfirmationEmail(job.Users.Email, false);
-
+                SendApplicationStatusEmail(apply.Users.Email, false); // Gửi email với tình trạng bị từ chối
             }
             else
             {
                 ViewBag.Error = "Error";
             }
 
-            return RedirectToAction("Menu");
+            return RedirectToAction("AppliedView");
         }
 
-        private void SendBookingConfirmationEmail(string patientEmail, bool accepted)
+        private void SendApplicationStatusEmail(string applicantEmail, bool accepted)
         {
-            var subject = accepted ? "Booking Confirmation" : "Booking Refusal";
-            var body = accepted ? "Your appointment has been successfully booked." : "Unfortunately, your appointment has been refused due to an emergency.";
+            var subject = accepted ? "TD-Freelancer Thông báo kết quả ứng tuyển" : "TD-Freelancer Thông báo kết quả ứng tuyển";
+            var body = accepted ? "Chúc mừng bạn, ứng tuyển của bạn đã được chấp nhận. \n Xin chào Nguyễn Tấn Đạt. \n TD-FreeLancer and Development xác nhận bạn đã ứng tuyển thành công vị trí mong đợi. Hồ sơ của bạn đã được gửi đến công ty. Nhà tuyển dụng sẽ liên hệ với bạn trong thời gian sớm nhất nếu hồ sơ của bạn phù hợp và đáp ứng yêu cầu tuyển dụng." : "Rất tiếc, ứng tuyển của bạn đã bị từ chối và không đủ điều kiện mà công ty mong đợi. Vui lòng xem xét lại một lần nữa trước khi Apply.";
+            var imageUrl = "https://cdn.dribbble.com/users/1304441/screenshots/3659805/media/5db56659b6ad74a29dc71d92e9c72f62.png?resize=400x0";
+
+            body += $"<br><img src=\"{imageUrl}\" alt=\"Your Image\" style=\"max-width: 50%;\"><br>";
 
             var mail = new SmtpClient("smtp.gmail.com", 587)
             {
@@ -315,12 +334,27 @@ namespace Research_science.Controllers
             var message = new MailMessage();
             message.From = new MailAddress("21280103e0017@student.tdmu.edu.vn");
             message.ReplyToList.Add("21280103e0017@student.tdmu.edu.vn");
-            message.To.Add(new MailAddress(patientEmail));
+            message.To.Add(new MailAddress(applicantEmail));
             message.Subject = subject;
             message.Body = body;
+            message.IsBodyHtml = true; // Đảm bảo email được gửi với định dạng HTML
 
             mail.Send(message);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         //[HttpGet]
         //public ActionResult DetailCV()
@@ -363,90 +397,24 @@ namespace Research_science.Controllers
             int iPageSize = 7;
             return View(db.Apply.ToList().OrderBy(n => n.ApplyID).ToPagedList(iPageNum, iPageSize));
         }
-     
 
-        //public ActionResult Accept(int id)
-        //{
-        //    var booking = db.Booking.FirstOrDefault(n => n.IDBooking == id);
 
-        //    if (booking != null)
-        //    {
-        //        booking.Accept = true;
-        //        db.SaveChanges();
 
-        //        SendBookingConfirmationEmail(booking.Patient.Email, true);
 
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Error = "Error";
-        //    }
-
-        //    return RedirectToAction("Index");
-        //}
-
-        //public ActionResult Refuse(int id)
-        //{
-        //    var booking = db.Booking.FirstOrDefault(n => n.IDBooking == id);
-
-        //    if (booking != null)
-        //    {
-        //        booking.Accept = false;
-        //        db.SaveChanges();
-
-        //        // Send email to patient
-        //        SendBookingConfirmationEmail(booking.Patient.Email, false);
-
-        //        // Additional logic if needed
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Error = "Error";
-        //    }
-
-        //    return RedirectToAction("Index");
-        //}
-
-        //private void SendBookingConfirmationEmail(string patientEmail, bool accepted)
-        //{
-        //    var subject = accepted ? "Booking Confirmation" : "Booking Refusal";
-        //    var body = accepted ? "Your appointment has been successfully booked." : "Unfortunately, your appointment has been refused due to an emergency.";
-
-        //    var mail = new SmtpClient("smtp.gmail.com", 587)
-        //    {
-        //        UseDefaultCredentials = false,
-        //        Credentials = new NetworkCredential("21280103e0017@student.tdmu.edu.vn", "sihi ngnu oipz plao"),
-        //        EnableSsl = true,
-        //    };
-
-        //    var message = new MailMessage();
-        //    message.From = new MailAddress("21280103e0017@student.tdmu.edu.vn");
-        //    message.ReplyToList.Add("21280103e0017@student.tdmu.edu.vn");
-        //    message.To.Add(new MailAddress(patientEmail));
-        //    message.Subject = subject;
-        //    message.Body = body;
-
-        //    mail.Send(message);
-        //}
-
-        [HttpGet]
         public ActionResult Detail(int id)
         {
-            Apply model = db.Apply.FirstOrDefault(n => n.ApplyID == id);
-      
-            return View(model);
-        }
-        [HttpPost]
-        public ActionResult Detail(Apply model)
-        {
-            if (ModelState.IsValid)
+            var userDetail = db.Users.SingleOrDefault(n => n.UserID == id);
+
+            if (userDetail == null)
             {
-                db.Apply.AddOrUpdate(model);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return HttpNotFound(); 
             }
-            return View();
+
+            userDetail.MaLoaiUser = 2;
+
+            return View(userDetail);
         }
+
 
     }
 }

@@ -4,107 +4,281 @@
     Layout = "~/Views/Shared/LayoutNavbar.cshtml";
 }
 
-<link href="~/Content/Item/ProfileCus.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <script src="~/Scripts/popper.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css'>
-
-<script src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js'></script>
-
-<div class="container">
-    <div class="row gutters">
-        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-            <div class="card h-100">
-                <div class="card-body">
-                    <div class="account-settings">
-                        <div class="user-profile">
-                            <div class="user-avatar user-avatar-frame" style="border: 2px solid #ccc; border-radius: 50%; width: 150px; height: 150px; overflow: hidden;">
-                                <img src="@Model.Image" alt="Maxwell Admin" style="width: 110%; height: 110%; object-fit: cover;">
-                            </div>
-                            <h5 class="user-name">@Model.FullName</h5>
-                            <h6 class="user-email">@Model.Email</h6>
-                        </div>
 
 
-                        <div class="about">
-                            <h5>About</h5>
-                            <p>@Model.Decsription</p>
-                        </div>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<style>
+    #DoctorProfile .body {
+        background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+    }
+
+    .emp-profile {
+        padding: 3%;
+        margin-top: 3%;
+        margin-bottom: 3%;
+        border-radius: 0.5rem;
+        background: #fff;
+    }
+
+    .profile-img {
+        text-align: center;
+    }
+
+        .profile-img img {
+            width: 70%;
+            height: 100%;
+        }
+
+        .profile-img .file {
+            position: relative;
+            overflow: hidden;
+            margin-top: -20%;
+            width: 70%;
+            border: none;
+            border-radius: 0;
+            font-size: 15px;
+            background: #212529b8;
+        }
+
+            .profile-img .file input {
+                position: absolute;
+                opacity: 0;
+                right: 0;
+                top: 0;
+            }
+
+    .profile-head h5 {
+        color: #333;
+    }
+
+    .profile-head h6 {
+        color: #0062cc;
+    }
+
+    .profile-edit-btn {
+        border: none;
+        border-radius: 1.5rem;
+        width: 70%;
+        padding: 2%;
+        font-weight: 600;
+        color: #6c757d;
+        cursor: pointer;
+    }
+
+    .proile-rating {
+        font-size: 12px;
+        color: #818182;
+        margin-top: 5%;
+    }
+
+        .proile-rating span {
+            color: #495057;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+    .profile-head .nav-tabs {
+        margin-bottom: 5%;
+    }
+
+        .profile-head .nav-tabs .nav-link {
+            font-weight: 600;
+            border: none;
+        }
+
+            .profile-head .nav-tabs .nav-link.active {
+                border: none;
+                border-bottom: 2px solid #0062cc;
+            }
+
+    .profile-work {
+        padding: 14%;
+        margin-top: -15%;
+    }
+
+        .profile-work p {
+            font-size: 12px;
+            color: #818182;
+            font-weight: 600;
+            margin-top: 10%;
+        }
+
+        .profile-work a {
+            text-decoration: none;
+            color: #495057;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .profile-work ul {
+            list-style: none;
+        }
+
+    .profile-tab label {
+        font-weight: 600;
+    }
+
+    .profile-tab p {
+        font-weight: 600;
+        color: #0062cc;
+    }
+</style>
+
+<div class="container emp-profile">
+    <form action="/HomePage/CustomerProfile" method="post" enctype="multipart/form-data">
+
+       
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <td>
+                        @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control", @hidden = true } })
+                        <img src="@Model.Image" style="width:100px;" />
+                    </td>
+                    <div class="file btn btn-lg btn-primary">
+                        Change Photo
+                        <input type="file" name="myFile" />
                     </div>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h2>
+                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                    </h2>
+
+                </div>
+            </div>
+
         </div>
-        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-            <div class="card h-100">
-                <div class="card-body">
-                    <div class="row gutters">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <h6 class="mb-2 text-primary">Personal Details</h6>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="fullName">Full Name</label>
-                                <input type="text" class="form-control" id="fullName" placeholder="@Model.FullName">
+        <br />
+        <hr />
+        <div class="row">
+
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>User Id</label>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.UserID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="eMail">Email</label>
-                                <input type="email" class="form-control" id="eMail" placeholder="Enter email ID">
+
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>UserName</label>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="phone">Phone</label>
-                                <input type="text" class="form-control" id="phone" placeholder="@Model.Phone">
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Password</label>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+                            </div>
+                            <hr />
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>ConfirmPass</label>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.ConfirmPass, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Email</label>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
                             </div>
                         </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="website">Website URL</label>
-                                <input type="url" class="form-control" id="website" placeholder="Website url">
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Phone</label>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+
+
+                                <hr />
                             </div>
                         </div>
-                    </div>
-                    <div class="row gutters">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <h6 class="mt-3 mb-2 text-primary">Address</h6>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="Street">Street</label>
-                                <input type="name" class="form-control" id="Street" placeholder="Enter Street">
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>CCCD</label>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.CanCuoc, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CanCuoc, "", new { @class = "text-danger" })
+                                <hr />
                             </div>
                         </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="ciTy">City</label>
-                                <input type="name" class="form-control" id="ciTy" placeholder="Enter City">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Address</label>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                <hr />
                             </div>
                         </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="sTate">State</label>
-                                <input type="text" class="form-control" id="sTate" placeholder="Enter State">
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Introduce Youself</label>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Decsription, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Decsription, "", new { @class = "text-danger" })
+                                <hr />
                             </div>
                         </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="zIp">Zip Code</label>
-                                <input type="text" class="form-control" id="zIp" placeholder="Zip Code">
+
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="LƯU THAY ĐỔI THÔNG TIN" class="btn btn-outline-warning" />
                             </div>
                         </div>
-                    </div>
-                    <div class="row gutters">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="text-right">
-                                <button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
-                                <button type="button" id="submit" name="submit" class="btn btn-primary">Update</button>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
+
         </div>
-    </div>
+
+    </form>
 </div>

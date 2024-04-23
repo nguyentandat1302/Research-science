@@ -1,9 +1,10 @@
 ﻿@model IEnumerable<Research_science.Models.Apply>
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 @{
     ViewBag.Title = "AppliedView";
     Layout = "~/Views/Employer/LayoutEmployer.cshtml";
 }
+
 
 <h2>Hồ Sơ CV Của Các Ứng Cử Viên</h2>
 
@@ -11,63 +12,80 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Job.JobName)
+            Tên Công Việc:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Users.FullName)
+            Tên Ứng Cử Viên:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CV)
+            Mô Tả:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Coverletter)
+            Tiêu Đề
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TimeAppointment)
+            Địa Chỉ
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            Status
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Accept)
-        </th>
+
+
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Job.JobName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Users.FullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CV)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Coverletter)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TimeAppointment)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Accept)
-        </td>
-        <td>
-            @Html.ActionLink("Detail", "Detail", new { id = item.ApplyID }, new { @class = "btn btn-primary" }) 
-        </td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job.JobName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Users.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Coverletter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
 
-    </tr>
-}
+            <td>
+                @if (item.Accept == true)
+                {
+                    <span class="text-success">Accept</span>
+                }
+                else if (item.Accept == false)
+                {
+                    <span class="text-danger">Refuse</span>
+                }
+                else
+                {
+                    <span class="text-danger">Pending</span>
+                }
+
+            </td>
+
+            <td>
+
+                @if (item.Accept != true)
+                {
+                    <a href="@Url.Action("Accept","Employer", new { id = item.JobID})" class="btn btn-outline-primary">Chấp nhận</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Refuse","Employer", new { id = item.JobID})" class="btn btn-outline-danger">Từ chối</a>
+                }
+
+            </td>
+            <td>
+                @Html.ActionLink("Detail", "Detail", new { id = item.UserID }, new { @class = "btn btn-primary" })
+            </td>
+
+        </tr>
+    }
 
 </table>

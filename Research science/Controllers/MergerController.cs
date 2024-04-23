@@ -1,4 +1,5 @@
-﻿using Research_science.Models;
+﻿using PagedList;
+using Research_science.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,39 @@ namespace Research_science.Controllers
         }
 
 
-        public ActionResult InforCty()
+
+        public ActionResult InforCty(string searchString, int? page)
         {
-            return PartialView();
+            searchString = searchString ?? "";
+
+            var filteredJobs = db.Job.Where(s => s.JobName.Contains(searchString)).OrderBy(s => s.JobID);
+
+            int pageNumber = (page ?? 1);
+            int pageSize = 3;
+            var pagedJobs = filteredJobs.ToPagedList(pageNumber, pageSize);
+
+            ViewBag.JobId = pagedJobs.FirstOrDefault()?.JobID;
+
+            return PartialView("InforCty", pagedJobs);
         }
+
+        //public ActionResult JobCty(int? Id)
+        //{
+        //    if (Id == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+
+        //    var job = db.Job.FirstOrDefault(j => j.JobID == Id);
+
+        //    if (job == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+
+        //    return View(job);
+        //}
+
 
 
         public ActionResult DetailCty(int Id)
@@ -31,13 +61,14 @@ namespace Research_science.Controllers
         }
 
 
+
+
         [HttpGet]
         public ActionResult Applied()
         {
-            // Truy vấn cơ sở dữ liệu để lấy danh sách các công việc đã được ứng tuyển
-            var appliedJobs = db.Job.ToList(); // Đây chỉ là ví dụ, bạn cần thay đổi truy vấn này tùy theo logic của ứng dụng
+            var appliedJobs = db.Job.ToList(); 
 
-            return View(appliedJobs);
+            return View(appliedJobs); 
         }
 
 

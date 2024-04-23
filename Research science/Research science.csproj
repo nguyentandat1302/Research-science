@@ -290,8 +290,9 @@
     <Content Include="Views\Employer\Details.cshtml" />
     <Content Include="Views\Employer\Delete.cshtml" />
     <Content Include="Views\Employer\Edit.cshtml" />
-    <Content Include="Views\Employer\Detail.cshtml" />
     <Content Include="Views\Employer\AppliedView.cshtml" />
+    <Content Include="Views\Merger\JobCty.cshtml" />
+    <Content Include="Views\Employer\Detail.cshtml" />
     <None Include="Web.Debug.Config">
       <DependentUpon>Web.Config</DependentUpon>
     </None>

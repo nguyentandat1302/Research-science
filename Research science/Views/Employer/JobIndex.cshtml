@@ -5,6 +5,18 @@
     Layout = "~/Views/Employer/LayoutEmployer.cshtml";
 }
 
+@helper Truncate(string s, int length)
+{
+    if (s.Length < length)
+    {
+        @s
+    }
+    else
+    {
+        @s.Substring(0, length)<text>...</text>
+    }
+}
+
 <h2>Thêm Những Công Việc </h2>
 
 <p>
@@ -13,69 +25,89 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Location.Country)
+            Country
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Users.FullName)
+            User Full Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.JobName)
+            Job Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Anh)
+            Anh
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            Title
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            Description
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Budget)
+            Budget
         </th>
-        
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location.Country)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Users.FullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.JobName)
-        </td>
-
-        <td>
-            <img src="@item.Anh" style="width:250px;" />
-
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Budget)
-        </td>
-
-        @*<td>
-            @Html.ActionLink("<i class='fas fa-edit'></i>", "Edit", new { id = item.JobID }, new { @class = "btn btn-primary btn-sm", title = "Edit" })
-            @Html.ActionLink("<i class='fas fa-info-circle'></i>", "Details", new { id = item.JobID }, new { @class = "btn btn-info btn-sm", title = "Details" })
-            @Html.ActionLink("<i class='fas fa-trash-alt'></i>", "Delete", new { id = item.JobID }, new { @class = "btn btn-danger btn-sm", title = "Delete", onclick = "return confirm('Are you sure you want to delete this item?');" })
-        </td>*@
-
-        <td>
-            <a href="@Url.Action("Edit", new { id = item.JobID })" class="btn btn-warning"> Edit</a>
-            <a href="@Url.Action("Details", new { id = item.JobID })" class="btn btn-primary"> Details</a>
-            <a href="@Url.Action("Delete", new { id = item.JobID })" class="btn btn-danger"> Delete</a>
-        </td>
-
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Users.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobName)
+            </td>
+            <td>
+                <img src="@item.Anh" style="width:250px;" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Budget)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new { id = item.JobID })" class="btn btn-warning"> Edit</a>
+                <a href="@Url.Action("Details", new { id = item.JobID })" class="btn btn-primary"> Details</a>
+                <a href="@Url.Action("Delete", new { id = item.JobID })" class="btn btn-danger"> Delete</a>
+            </td>
+        </tr>
+    }
 </table>
+
+
+<div class="pagination justify-content-center">
+    <ul class="pagination">
+        @if (ViewBag.HasPreviousPage)
+        {
+            <li class="page-item">
+                <a class="page-link" href="@Url.Action("JobIndex", new { page = ViewBag.PageNumber - 1 })">Previous</a>
+            </li>
+        }
+
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <li class="page-item @(i == ViewBag.PageNumber ? "active" : "")">
+                <a class="page-link" href="@Url.Action("JobIndex", new { page = i })">@i</a>
+            </li>
+        }
+
+        @if (ViewBag.HasNextPage)
+        {
+            <li class="page-item">
+                <a class="page-link" href="@Url.Action("JobIndex", new { page = ViewBag.PageNumber + 1 })">Next</a>
+            </li>
+        }
+    </ul>
+</div>
+
+
+<p>
+    @Html.ActionLink("Back to List", "Menu")
+</p>

@@ -1,62 +1,38 @@
-﻿@model Research_science.Models.Apply
+﻿@model Research_science.Models.Users
 
 @{
     ViewBag.Title = "Detail";
-    Layout = "~/Views/Employer/LayoutEmployer.cshtml";
+    Layout = "~/Views/Shared/LayoutNavbar.cshtml";
 }
 
-<h2>Thông Tin Chi Tiết Về CV Của Các Ứng Cử Viên</h2>
+<h2>Thông Tin Của Ứng Cử Viên</h2>
 
 <div>
-    <h4>Dưới Đây Là Thông Tin Của Họ</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Job.JobName)
+            @Html.DisplayNameFor(model => model.LoaiUser.TenLoai)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Job.JobName)
+            @Html.DisplayFor(model => model.LoaiUser.TenLoai)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Users.FullName)
+            @Html.DisplayNameFor(model => model.FullName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Users.FullName)
+            @Html.DisplayFor(model => model.FullName)
         </dd>
 
+
         <dt>
-            @Html.DisplayNameFor(model => model.CV)
+            @Html.DisplayNameFor(model => model.Phone)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CV)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Coverletter)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Coverletter)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TimeAppointment)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TimeAppointment)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
+            @Html.DisplayFor(model => model.Phone)
         </dd>
 
         <dt>
@@ -68,15 +44,42 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Accept)
+            @Html.DisplayNameFor(model => model.Decsription)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Accept)
+            @Html.DisplayFor(model => model.Decsription)
         </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+        <dd>
+            <img style="height:200px;width:200px" src="@Model.Image" alt=" @Model.FullName">
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CanCuoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CanCuoc)
+        </dd>
+
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("QUAY LẠI TRANG TRƯỚC", "AppliedView")
 </p>

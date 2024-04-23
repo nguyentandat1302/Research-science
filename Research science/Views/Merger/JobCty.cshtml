@@ -1,0 +1,93 @@
+﻿@model Research_science.Models.Job
+
+@{
+    ViewBag.Title = "JobCty";
+    Layout = "~/Views/Shared/LayoutNavbar.cshtml";
+}
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/2@icon/entypo@1.0.3/entypo.css" rel="stylesheet">
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css'>
+<script src='https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js'></script>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 ">
+            <div class="card left-profile-card">
+                <div class="card-body">
+                    <div class="text-center">
+                        <img src="@Model.Anh" alt="" class="user-profile" style="max-width: 200px; max-height: 200px;">
+                        <h3>@Model.JobName</h3>
+                        <p>@Model.Description</p>
+                        <div class="d-flex align-items-center justify-content-center mb-3">
+                            <i class="fas fa-star text-info"></i>
+                            <i class="fas fa-star text-info"></i>
+                            <i class="fas fa-star text-info"></i>
+                            <i class="fas fa-star text-info"></i>
+                            <i class="fas fa-star text-info"></i>
+                        </div>
+                    </div>
+
+                    <div class="personal-info">
+                        <h3>Company Information</h3>
+                        <ul class="personal-list">
+                            <li><i class="fas fa-briefcase "></i><span>@Model.Title</span></li>
+                            <li><i class="fas fa-map-marker-alt "></i><span>@Model.Budget</span></li>
+
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="card right-profile-card">
+
+                <div class="card-body">
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <div class="work-container">
+
+
+                                <h3>Tech Lead :- World of Internet</h3>
+                                <h4><i class="far fa-calendar-alt"></i>Jan 2017 to <span class="badge badge-info">Current</span></h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </div>
+
+                            <div class="work-container">
+                                <h3>Jr. Front End Developer :- Graphics Media</h3>
+                                <h4><i class="far fa-calendar-alt"></i>Jan 2017 to <span class="badge badge-info">Current</span></h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="@Url.Action("CustomerProfile","HomePage")" type="button" class="btn btn-outline-secondary">Create CV to Apply</a>
+            @{
+                var isLoggedIn = Session["UserName"] != null ? "true" : "false";
+            }
+
+            @if (isLoggedIn == "true")
+            {
+                <button type="button" class="btn btn-danger" style="border-radius: 0px;" id="apply-button">Apply Now</button>
+                <div class="alert alert-success" role="alert" id="success-message" style="display: none;">
+                    Application submitted successfully!
+                </div>
+            }
+            else
+            {
+                <a href="@Url.Action("Login", "User")">
+                    <button type="button" class="btn btn-danger" style="border-radius: 0px;">Apply Now</button>
+                </a>
+            }
+
+        </div>
+    </div>
+</div>
+
+
+
