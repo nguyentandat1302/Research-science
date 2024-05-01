@@ -21,36 +21,6 @@ namespace Research_science.Areas.Admin.Controllers
             return View(db.Job.ToList().OrderBy(n => n.JobID).ToPagedList(iPageNum, iPageSize));
         }
 
-        //[HttpGet]
-        //public ActionResult Create()
-        //{
-        //    ViewBag.SkillID = new SelectList(db.Skill.ToList().OrderBy(n => n.SkillName), "SkillID", "SKilName");
-        //    ViewBag.IdLocation = new SelectList(db.Location.ToList().OrderBy(n => n.Country), "IdLocation", "Country");
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //[ValidateInput(false)]
-        //public ActionResult Create(Job model, FormCollection f, HttpPostedFileBase fFileUpload)
-        //{
-
-        //    ViewBag.SkillID = new SelectList(db.Skill.ToList().OrderBy(n => n.SkillName), "SkillID", "SKilName");
-        //    ViewBag.IdLocation = new SelectList(db.Location.ToList().OrderBy(n => n.Country), "IdLocation", "Country");
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (fFileUpload != null)
-        //        {
-        //            Image img = Image.FromStream(fFileUpload.InputStream, true, true);
-        //            //model.im = Utility.ConvertImageToBase64(img);
-        //        }
-
-        //        db.Job.Add(model);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View();
-        //}
-
         public static string ConverImageToBase64(string path)
         {
             using (Image image = Image.FromFile(path))
@@ -104,47 +74,7 @@ namespace Research_science.Areas.Admin.Controllers
         }
 
 
-        [HttpGet]
-        public ActionResult Edit(int id)
-        {
-            var job = db.Job.SingleOrDefault(n => n.JobID == id);
-            if (job == null)
-            {
-                Response.StatusCode = 404;
-                return null;
-            }
-            ViewBag.SkillID = new SelectList(db.Skill.ToList().OrderBy(n => n.SkillName), "SkillID", "SKilName");
-            ViewBag.IdLocation = new SelectList(db.Location.ToList().OrderBy(n => n.Country), "IdLocation", "Country");
-            return View(job);
-        }
-
-
-        [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult Edit(FormCollection f, HttpPostedFileBase fFileUpload)
-        {
-            var job = db.Job.SingleOrDefault(n => n.JobID == int.Parse(f["iMaSach"]));
-            ViewBag.SkillID = new SelectList(db.Skill.ToList().OrderBy(n => n.SkillName), "SkillID", "SKilName");
-            ViewBag.IdLocation = new SelectList(db.Location.ToList().OrderBy(n => n.Country), "IdLocation", "Country");
-            if (ModelState.IsValid)
-            {
-                if (fFileUpload != null)
-                {
-
-                    var sFileName = Path.GetFileName(fFileUpload.FileName);
-
-                    var path = Path.Combine(Server.MapPath("~/Images"), sFileName);
-                    if (!System.IO.File.Exists(path))
-                    {
-                        fFileUpload.SaveAs(path);
-                    }
-                    //sach.Anhbia = sFileName;
-                }
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(job);
-        }   //    }
+   //    }
 
     }
 }

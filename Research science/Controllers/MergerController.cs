@@ -3,6 +3,7 @@ using Research_science.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -35,22 +36,24 @@ namespace Research_science.Controllers
             return PartialView("InforCty", pagedJobs);
         }
 
-        //public ActionResult JobCty(int? Id)
-        //{
-        //    if (Id == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
+        public ActionResult JobCty(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
-        //    var job = db.Job.FirstOrDefault(j => j.JobID == Id);
+            var job = db.Job.FirstOrDefault(j => j.JobID == id);
 
-        //    if (job == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
+            if (job == null)
+            {
+                return HttpNotFound();
+            }
 
-        //    return View(job);
-        //}
+            return View(job);
+        }
+
+
 
 
 

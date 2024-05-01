@@ -18,24 +18,7 @@ namespace Research_science.Areas.Admin.Controllers
             int iPageSize = 7;
             return View(db.Location.ToList().OrderBy(n => n.IdLocation).ToPagedList(iPageNum, iPageSize));
         }
-        [HttpGet]
-        public ActionResult Create()
-        {
-            ViewBag.IdLocation = new SelectList(db.Location.ToList().OrderBy(n => n.IdLocation), "IdLocation", "Country");
-
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult Create(Location model, FormCollection f, HttpPostedFileBase fFileUpload)
-        {
-
-            ViewBag.IdLocation = new SelectList(db.Location.ToList().OrderBy(c => c.IdLocation), "IdLocation", "Country");
-
-
-            return View();
-        }
+   
         [HttpGet]
         public ActionResult Delete(int id)
         {
@@ -62,6 +45,16 @@ namespace Research_science.Areas.Admin.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+        public ActionResult Details(int id)
+        {
+            var location = db.Location.SingleOrDefault(n => n.IdLocation == id);
+            if (location == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(location);
         }
     }
 }

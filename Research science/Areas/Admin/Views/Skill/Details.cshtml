@@ -1,0 +1,31 @@
+﻿@model Research_science.Models.Skill
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<h2>Chi Tiết</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SkillName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkillName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Experience)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Experience)
+        </dd>
+
+    </dl>
+</div>
+

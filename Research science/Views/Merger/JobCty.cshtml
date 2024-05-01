@@ -18,7 +18,7 @@
             <div class="card left-profile-card">
                 <div class="card-body">
                     <div class="text-center">
-                        <img src="@Model.Anh" alt="" class="user-profile" style="max-width: 200px; max-height: 200px;">
+                        <img src="@Model.Anh" alt="" class="user-profile" style="max-width:     200px; max-height: 200px;">
                         <h3>@Model.JobName</h3>
                         <p>@Model.Description</p>
                         <div class="d-flex align-items-center justify-content-center mb-3">
@@ -88,6 +88,26 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var isLoggedIn = @Html.Raw(isLoggedIn);
+
+        if (isLoggedIn) {
+            var applyButton = document.getElementById("apply-button");
+            var successMessage = document.getElementById("success-message");
+
+            applyButton.addEventListener("click", function() {
+                // Hiển thị thanh thông báo thành công
+                successMessage.style.display = "block";
+
+                // Ẩn thanh thông báo sau 3 giây và chuyển hướng sau khi ẩn
+                setTimeout(function() {
+                    window.location.href = "@Url.Action("Applied", "Merger")";
+                }, 3000);
+            });
+        }
+    });
+</script>
 
 
 

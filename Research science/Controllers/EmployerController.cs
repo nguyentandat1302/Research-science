@@ -45,28 +45,28 @@ namespace Research_science.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Job model, HttpPostedFileBase fFileUpload)
+        [ValidateInput(false)]
+        public ActionResult Create(Job model, FormCollection f, HttpPostedFileBase fFileUpload)
         {
             if (ModelState.IsValid)
             {
-                if (fFileUpload != null && fFileUpload.ContentLength > 0)
+                if (fFileUpload != null)
                 {
-                    // Lưu tập tin ảnh vào thư mục hoặc lưu trữ tùy chọn
-                    string fileName = Path.GetFileName(fFileUpload.FileName);
-                    string filePath = Path.Combine(Server.MapPath("~/Uploads"), fileName);
-                    fFileUpload.SaveAs(filePath);
-
-                    model.Anh = "/Uploads/" + fileName;
+                    Image img = Image.FromStream(fFileUpload.InputStream, true, true);
+                    model.Anh = Utility.ConvertImageToBase64(img);
                 }
 
                 db.Job.Add(model);
                 db.SaveChanges();
                 return RedirectToAction("JobIndex");
             }
+
+            // ModelState không hợp lệ, cần đặt lại ViewBag.IdLocation trước khi trả về View
             ViewBag.IdLocation = new SelectList(db.Location.ToList().OrderBy(n => n.Country), "IdLocation", "Country", model.IdLocation);
             return View(model);
         }
+
+
 
 
         public static string ConverImageToBase64(string path)

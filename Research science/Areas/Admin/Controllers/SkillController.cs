@@ -63,5 +63,16 @@ namespace Research_science.Areas.Admin.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult Details(int id)
+        {
+            var skill = db.Skill.SingleOrDefault(n => n.SkillID == id);
+            if (skill == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(skill);
+        }
     }
 }

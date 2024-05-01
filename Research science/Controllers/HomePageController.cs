@@ -11,13 +11,17 @@ using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
 using System.Web.UI;
+using SelectPdf;
+using IronPdf.Rendering;
 
 namespace Research_science.Controllers
 {
-    public class HomePageController : Controller
+    public class HomePageController : BaseController
     {
-        // GET: HomePage
         Model1 db = new Model1();
+
+        private object _accountService;
+       
 
         public ActionResult Index()
         {
@@ -183,6 +187,88 @@ namespace Research_science.Controllers
             return View(model);
         }
 
+        public ActionResult ExportPdf()
+        {
+            var model = GetModelData();
+
+            HtmlToPdf converter = new HtmlToPdf();
+
+            // Kiểm tra xem model có dữ liệu không trước khi tạo file PDF
+            if (model != null)
+            {
+                var htmlPdf = RenderPartialToString("~/Views/HomePage/DownloadPdf.cshtml", model, ControllerContext);
+
+                PdfDocument doc = converter.ConvertHtmlString(htmlPdf);
+
+                string fileName = SavePdfToFile(doc);
+
+                return Json(fileName, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Content("Không có dữ liệu để tạo file PDF.");
+            }
+        }
+
+        public Users GetModelData()
+        {
+            if (Session["UserName"] != null)
+            {
+                return (Users)Session["UserName"];
+            }
+            return null;
+        }
+
+        public string RenderPartialToString(string viewName, object model, ControllerContext controllerContext)
+        {
+            if (string.IsNullOrEmpty(viewName))
+                viewName = controllerContext.RouteData.GetRequiredString("action");
+
+            // Kiểm tra xem model có dữ liệu không trước khi gán vào ViewData
+            if (model != null)
+            {
+                ViewData.Model = model;
+            }
+
+            using (var sw = new StringWriter())
+            {
+                var viewResult = ViewEngines.Engines.FindPartialView(controllerContext, viewName);
+                var viewContext = new ViewContext(controllerContext, viewResult.View, ViewData, TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+
+                return sw.GetStringBuilder().ToString();
+            }
+        }
+
+
+        // Phương thức này để lưu file PDF và trả về tên file
+        public string SavePdfToFile(PdfDocument doc)
+        {
+            string fileName = string.Format("{0}.pdf", DateTime.Now.Ticks);
+            string pathFile = Path.Combine(Server.MapPath("~/Resource/Pdf"), fileName);
+
+            doc.Save(pathFile);
+            doc.Close();
+
+            return fileName;
+        }
+
+
+        public ActionResult DownloadPdf(string fileName)
+        {
+            if (Session["UserName"] != null)
+            {
+                var customer = (Users)Session["UserName"];
+                customer.ConfirmPass = customer.Password;
+
+                if (customer != null)
+                {
+                    return PartialView("DownloadPdf", customer);
+                }
+            }
+            string filePath = Path.Combine(Server.MapPath("~/Resource/Pdf"), fileName);
+            return File(filePath, "application/pdf", fileName);
+        }
 
 
 

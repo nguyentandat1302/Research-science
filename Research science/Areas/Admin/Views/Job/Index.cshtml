@@ -5,11 +5,9 @@
     Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
 }
 
-<h2>Xem Các Công Việc Của Các Công Ty</h2>
+<h2>Xem Các Công Việc </h2>
 
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
+
 <table class="table">
     <tr>
         <th>
@@ -60,7 +58,7 @@
             @Html.DisplayFor(modelItem => item.Accept)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.JobID }, new { @class = "btn btn-warning" }) |
+            @*@Html.ActionLink("Edit", "Edit", new { id = item.JobID }, new { @class = "btn btn-warning" }) |*@
             @Html.ActionLink("Details", "Details", new { id = item.JobID }, new { @class = "btn btn-primary" }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.JobID }, new { @class = "btn btn-danger" })
         </td>

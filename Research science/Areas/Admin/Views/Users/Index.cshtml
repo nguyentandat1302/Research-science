@@ -1,127 +1,159 @@
-﻿@model IEnumerable<Research_science.Models.Users>
-
+﻿@*@model IEnumerable<Research_science.Models.Users>*@
+@using PagedList.Mvc;
+@using Research_science.Models
+@helper Truncate(string sa, int length)
+{
+    sa = sa ?? "";
+    if (sa.Length < length)
+    {
+        @sa
+    }
+    else
+    {
+        @sa.Substring(0, length)<text>...</text>
+    }
+}
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
 }
 
-<h2>Tất Cả Thông Tin Của Công Ty Và Tất Cả Ứng Cử Viên</h2>
+<h2>Account của Company và Ứng Cử Viên</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.LoaiUser.TenLoai)
+            Phân Loại:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FullName)
+            FullName
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LogoCompany)
+            LogoCompany
+        </th>
+        @*<th>
+                Số Điện Thoại
+            </th>*@
+        <th>
+            Address
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Phone)
+            Decsription
+        </th>
+
+        <th>
+            Image
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Address)
+            UserName
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Decsription)
+            Password
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CDCD)
+            Email
         </th>
+
         <th>
-            @Html.DisplayNameFor(model => model.BirthDay)
+            Business
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Image)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Wallet)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Business)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CanCuoc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Accpet)
-        </th>
+        @*<th>
+                CanCuoc
+            </th>*@
+
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.LoaiUser.TenLoai)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FullName)
-        </td>
-        <td>
-            <img src="@item.LogoCompany" style="width:50px;" />
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Truncate(item.LoaiUser.TenLoai, 50)
+            </td>
+            <td>
+                @Truncate(item.FullName, 50)
+            </td>
+            <td>
+                <img src="@item.LogoCompany" style="width:50px;" />
 
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Decsription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CDCD)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BirthDay)
-        </td>
-        <td>
-            <img src="@item.Image" style="width:50px;" />
+            </td>
+            @*<td>
+                    @Truncate(item.Phone, 100)
+                </td>*@
+            <td>
+                @Truncate(item.Address, 100)
+            </td>
+            <td>
+                @Truncate(item.Decsription, 200)
+            </td>
 
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Wallet)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Business)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CanCuoc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Accpet)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.UserID }, new { @class = "btn btn-warning" }) |
-            @Html.ActionLink("Details", "Details", new { id = item.UserID }, new { @class = "btn btn-primary" }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.UserID }, new { @class = "btn btn-danger" })
-        </td>
 
-    </tr>
-}
+            <td>
+                <img src="@item.Image" style="width:50px;" />
+
+            </td>
+            <td>
+                @Truncate(item.UserName, 50)
+            </td>
+            <td>
+                @Truncate(item.Password, 50)
+            </td>
+            <td>
+                @Truncate(item.Email, 50)
+            </td>
+
+            <td>
+                @Truncate(item.Business, 100)
+            </td>
+            @*<td>
+                    @Truncate(item.CanCuoc, 100)
+                </td>*@
+
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.UserID }, new { @class = "btn btn-warning" }) |*@
+                @Html.ActionLink("Details", "Details", new { id = item.UserID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.UserID }, new { @class = "btn btn-danger" })
+            </td>
+
+        </tr>
+    }
 
 </table>
+
+<div class="MenuTrang">
+    @Html.PagedListPager((PagedList.IPagedList)Model, page => Url.Action("Index", new { page = page }))
+</div>
+
+<style>
+    .MenuTrang {
+        display: flex;
+        justify-content: center;
+    }
+
+        .MenuTrang .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+        }
+
+            .MenuTrang .pagination li {
+                margin: 0 5px;
+            }
+
+                .MenuTrang .pagination li a {
+                    text-decoration: none;
+                    padding: 5px 10px;
+                    border: 1px solid #ccc;
+                    border-radius: 3px;
+                    color: #333;
+                }
+
+                .MenuTrang .pagination li.active a {
+                    background-color: #007bff;
+                    color: #fff;
+                }
+
+</style>
