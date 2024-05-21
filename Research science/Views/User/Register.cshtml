@@ -24,11 +24,9 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <h2>Register As a job seeker</h2>
 
-            <div class="mb-3">
-                <label for="inputEmail" class="form-label">Account Email</label>
-                <input type="text" class="form-control" id="inputEmail" placeholder="Email" style="min-width:500px" name="Email">
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
+            <label for="exampleFormControlInput1" class="form-label">USERNAME </label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" aria-describedby="passwordHelpBlock" placeholder="Username" style="min-width:500px" name="USERNAME">
+            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
 
             <div class="mb-3">
                 <label for="inputPassword" class="form-label">Password</label>
@@ -40,9 +38,9 @@
             </div>
 
 
-                <label for="inputPassword5" class="form-label">Confirm Password</label>
-                <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Confirm Password" style="min-width:500px" name="ConfirmPassword">
-                @Html.ValidationMessageFor(model => model.ConfirmPass, "", new { @class = "text-danger" })
+            <label for="inputPassword5" class="form-label">Confirm Password</label>
+            <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Confirm Password" style="min-width:500px" name="ConfirmPassword">
+            @Html.ValidationMessageFor(model => model.ConfirmPass, "", new { @class = "text-danger" })
 
 
 
@@ -64,7 +62,7 @@
                 @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
             </div>
 
-          
+
             <div class="mb-3">
                 <label for="inputBirthday" class="form-label">BirthDay</label>
                 <input type="date" class="form-control" id="inputBirthday" name="Enter happy birthday">

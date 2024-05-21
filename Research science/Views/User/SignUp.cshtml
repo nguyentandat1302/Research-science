@@ -22,7 +22,7 @@
     <form style="border: solid; border-width: 3px; border-radius: 10px; padding: 20px;" action="/User/SignUp" method="post">
         <div>
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <h2>Sign Up Employers</h2>
+            <h2>Sign Up Company</h2>
             <label for="exampleFormControlInput1" class="form-label">USERNAME </label>
             <input type="text" class="form-control" id="exampleFormControlInput1" aria-describedby="passwordHelpBlock" placeholder="Username" style="min-width:500px" name="USERNAME">
             @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
